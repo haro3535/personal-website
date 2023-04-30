@@ -1,8 +1,11 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Script from 'next/script'
+import Link from 'next/link'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import pp from '../../public/ben.jpg'
+import ClickThatButton from './_homePageFunctions'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,6 +27,7 @@ export default function Home() {
             className={`${styles.profilePhoto}`}
             width={500}
             height={500}
+            priority={true}
           />
           <div>
             <h3>Harun Onur</h3>
@@ -34,13 +38,27 @@ export default function Home() {
           <h1>Sağ div</h1>
           <div className={`${styles.rightMenu}`}>
             <div className={`${styles.rightMenuDiv}`}>
-              <div className={`${styles.rightMenuDivElements}`}>
-                <h3>Projelerim</h3>
-              </div>
+              <a href='#projectsView'>
+                <div className={`${styles.rightMenuDivElements}`}>
+                  <h3>Projelerim</h3>
+                </div>
+              </a>
               <div className={`${styles.rightMenuDivElements}`}>
                 <h3>Hakkımda</h3>
               </div>
             </div>
+          </div>
+        </div>
+      </main>
+
+      <main id='projectsView' className={`${styles.projects}`}>
+        <div className={`${styles.projectDiv}`}>
+          <h1>Projelerim</h1>
+          <p>Yazılar burada olacak</p>
+          <div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
         </div>
       </main>
