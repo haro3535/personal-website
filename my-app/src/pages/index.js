@@ -25,6 +25,10 @@ export default function Home() {
             width={500}
             height={500}
           />
+          <div>
+            <h3>Harun Onur</h3>
+            <p>Yazılar</p>
+          </div>
         </div>
         <div className={`${styles.rightDiv}`}>
           <h1>Sağ div</h1>

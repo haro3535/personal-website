@@ -62,6 +62,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.rightMenuDivElementsHiddenElement{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  bottom: 0;
+  background-color: white;
+  z-index: 0;
+}
+
+.rightMenuDivElements:hover{
+  background-color: white;
+  color: black;
+  mix-blend-mode: difference;
+  transition: ease-in-out 0.25s;
+}
+
+@keyframes hoverEffect {
+  0%{
+
+  }
+  100%{}
 }
 
 
