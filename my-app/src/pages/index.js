@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import pp from '../../public/ben.jpg'
 import ClickThatButton from './_homePageFunctions'
+import ProjectsView from './projectView'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,7 +21,6 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={`${styles.leftDiv}`}>
-          <h1>Sol div</h1>
           <Image
             src={"/ben.jpg"}
             alt='Picture of the author'
@@ -35,7 +35,6 @@ export default function Home() {
           </div>
         </div>
         <div className={`${styles.rightDiv}`}>
-          <h1>Sağ div</h1>
           <div className={`${styles.rightMenu}`}>
             <div className={`${styles.rightMenuDiv}`}>
               <a href='#projectsView'>
@@ -50,18 +49,8 @@ export default function Home() {
           </div>
         </div>
       </main>
-
-      <main id='projectsView' className={`${styles.projects}`}>
-        <div className={`${styles.projectDiv}`}>
-          <h1>Projelerim</h1>
-          <p>Yazılar burada olacak</p>
-          <div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-        </div>
-      </main>
+      <ProjectsView></ProjectsView>
+      
     </>
   )
 }

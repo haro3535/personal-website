@@ -90,34 +90,7 @@
 }
 
 
-.projects{
-  width: 100%;
-  height: 100vh;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
 
-.projectDiv{
-  width: 80vw;
-  height: 90vh;
-  border: 1px solid white;
-}
-.pMiddle{
-  width: 80vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.pLeft{
-  justify-content: end;
-}
-.pRight{
-  justify-content: start;
-}
 
 
 
