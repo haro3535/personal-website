@@ -7,6 +7,7 @@ import styles from '@/styles/Home.module.css'
 import pp from '../../public/ben.jpg'
 import ClickThatButton from './_homePageFunctions'
 import ProjectsView from './projectView'
+import MyAccounts from './socialAccounts'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -50,6 +51,7 @@ export default function Home() {
         </div>
       </main>
       <ProjectsView></ProjectsView>
+      <MyAccounts></MyAccounts>
       
     </>
   )
