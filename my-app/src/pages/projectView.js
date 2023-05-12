@@ -8,7 +8,7 @@ export default function ProjectsView(){
           <p className="pp">Yazılar burada olacak</p>
           <button className="pbutton">Hepsini Gör</button>
         </div>
-        <div className="projectGalary">
+        <div className="projectGalary mb-2">
             <div className="pElements pLeft"><h3>Sol</h3></div>
             <div className="pElements pMiddle"><h3>Orta</h3></div>
             <div className="pElements pRight"><h3>Sağ</h3></div>

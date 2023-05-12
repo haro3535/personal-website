@@ -8,6 +8,7 @@ import pp from '../../public/ben.jpg'
 import ClickThatButton from './_homePageFunctions'
 import ProjectsView from './projectView'
 import MyAccounts from './socialAccounts'
+import AboutView from './aboutView'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,20 +39,23 @@ export default function Home() {
         <div className={`${styles.rightDiv}`}>
           <div className={`${styles.rightMenu}`}>
             <div className={`${styles.rightMenuDiv}`}>
-              <a href='#projectsView'>
+              <a href='#projectsView' className='text-reset text-decoration-none'>
                 <div className={`${styles.rightMenuDivElements}`}>
                   <h3>Projelerim</h3>
                 </div>
               </a>
-              <div className={`${styles.rightMenuDivElements}`}>
-                <h3>Hakkımda</h3>
-              </div>
+              <a href='#about' className='text-reset text-decoration-none'>
+                <div className={`${styles.rightMenuDivElements}`}>
+                  <h3>Hakkımda</h3>
+                </div>
+              </a>
             </div>
           </div>
         </div>
       </main>
       <ProjectsView></ProjectsView>
       <MyAccounts></MyAccounts>
+      <AboutView></AboutView>
       
     </>
   )
