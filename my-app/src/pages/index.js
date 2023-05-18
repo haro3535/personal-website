@@ -4,13 +4,13 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import pp from '../../public/ben.jpg'
 import ClickThatButton from './_homePageFunctions'
 import ProjectsView from './projectView'
 import MyAccounts from './socialAccounts'
 import AboutView from './aboutView'
 
 const inter = Inter({ subsets: ['latin'] })
+//Color pattern link https://colorhunt.co/palette/f1f6f9394867212a3e9ba4b5
 
 export default function Home() {
   return (
@@ -21,17 +21,31 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={`${styles.main} ${inter.className}`} 
+      style={
+        {
+          width: 100 + "vw",
+          height: 100 + "vh",
+          objectFit: "contain",
+          objectPosition: "center", 
+        }}>
+        <Image
+          src={"/pp.jpg"}
+          style={{zIndex: -1, position: "absolute"}}
+          width={1920}
+          height={1080}
+          priority={true}
+        />
         <div className={`${styles.leftDiv}`}>
-          <Image
-            src={"/ben.jpg"}
+        <Image
+            src={"/pp.jpg"}
             alt='Picture of the author'
             className={`${styles.profilePhoto}`}
             width={500}
             height={500}
             priority={true}
           />
-          <div>
+          <div style={{width: 20+"vw",backgroundColor: "rgba(0,0,0,0.4)"}}>
             <h3>Harun Onur</h3>
             <p>Yazılar</p>
           </div>
