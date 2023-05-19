@@ -4,8 +4,10 @@
   justify-content: space-between;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,1) 60%);
+  background: linear-gradient(180deg,rgb(0, 0, 0, 0),rgb(0, 0, 0, 1) 80%);
 }
+
+.backgroundImageDiv{}
 
 .leftDiv{
   height: 100vh;
@@ -15,6 +17,7 @@
   justify-content: center;
   align-items: center;
   color: #F1F6F9;
+  z-index: 2;
 }
 
 .profilePhoto{
@@ -23,6 +26,7 @@
   border-radius: 5rem;
   object-fit: cover;
   object-position: center;
+  z-index: 2;
 }
 
 .rightDiv{
@@ -33,16 +37,17 @@
   justify-content: center;
   align-items: center;
   color: white;
+  z-index: 2;
 }
 
 .rightMenu{
-  height: 45vh;
-  width: 70%;
+  height: 60vh;
+  width: 30vw;
   border: 2px solid rgb(234, 234, 234);
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 

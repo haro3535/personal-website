@@ -8,6 +8,7 @@ import ClickThatButton from './_homePageFunctions'
 import ProjectsView from './projectView'
 import MyAccounts from './socialAccounts'
 import AboutView from './aboutView'
+import Footer from './footer'
 
 const inter = Inter({ subsets: ['latin'] })
 //Color pattern link https://colorhunt.co/palette/f1f6f9394867212a3e9ba4b5
@@ -32,8 +33,7 @@ export default function Home() {
         <Image
           src={"/pp.jpg"}
           style={{zIndex: -1, position: "absolute"}}
-          width={1920}
-          height={1080}
+          fill={true}
           priority={true}
         />
         <div className={`${styles.leftDiv}`}>
@@ -45,7 +45,7 @@ export default function Home() {
             height={500}
             priority={true}
           />
-          <div style={{width: 20+"vw",backgroundColor: "rgba(0,0,0,0.4)"}}>
+          <div>
             <h3>Harun Onur</h3>
             <p>Yazılar</p>
           </div>
@@ -70,6 +70,7 @@ export default function Home() {
       <ProjectsView></ProjectsView>
       <MyAccounts></MyAccounts>
       <AboutView></AboutView>
+      <Footer></Footer>
       
     </>
   )
