@@ -6,7 +6,7 @@ export default function ProjectsView(){
         <div className="projectDiv">
           <h1 className="ph1">Projelerim</h1>
           <p className="pp">Yazılar burada olacak</p>
-          <button className="pbutton">Hepsini Gör</button>
+          <button className="pbutton btn btn-outline-primary">Hepsini Gör</button>
         </div>
         <div className="projectGalary mb-2">
             <div className="pElements pLeft"><h3>Sol</h3></div>
