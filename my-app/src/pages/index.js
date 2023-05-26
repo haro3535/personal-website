@@ -4,7 +4,6 @@ import Script from 'next/script'
 import Link from 'next/link'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import ClickThatButton from './_homePageFunctions'
 import ProjectsView from './projectView'
 import MyAccounts from './socialAccounts'
 import AboutView from './aboutView'
@@ -55,12 +54,12 @@ export default function Home() {
             <div className={`${styles.rightMenuDiv}`}>
               <a href='#projectsView' className='text-reset text-decoration-none'>
                 <div className={`${styles.rightMenuDivElements}`}>
-                  <h3>Projelerim</h3>
+                  <h5>Projects</h5>
                 </div>
               </a>
               <a href='#about' className='text-reset text-decoration-none'>
                 <div className={`${styles.rightMenuDivElements}`}>
-                  <h3>Hakkımda</h3>
+                  <h5>About Me</h5>
                 </div>
               </a>
             </div>

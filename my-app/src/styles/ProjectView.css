@@ -15,25 +15,19 @@
     width: 85vw;
     height: auto;
     padding-top: 2rem;
-    display: flex;
-    flex-direction: column;
   }
   .projectGalary{
-    width: 95vw;
+    width: 85vw;
     height: 60vh;
     margin-top: 3rem;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
+    padding-left: 3rem;
   }
   .pElements{
+    width: 100%;
+    height: auto;
     border: 1px solid black;
+    margin-bottom: 0.25rem;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
   }
   .pMiddle{
     height: 100%;
@@ -53,7 +47,15 @@
     margin-bottom: 2rem;
 }
 
-.pbutton{
-    margin-left: auto;
-    margin-right: auto;
+.elementPhoto{
+  width: 8rem;
+  height: 8rem;
 }
+
+.myLink:hover{
+  background-color: #F1F6F9;
+  color: #394867;
+  transition: ease-in-out 0.25s;
+  cursor: pointer;
+}
+
