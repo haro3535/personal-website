@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+import Image from 'next/image'
 
 //const { data, error } = useSWR('/api/staticdata', fetcher);
 
@@ -23,15 +24,61 @@ export default function ProjectsView(){
           </div>
           <div className="projectGalary mb-2">
             <div className='pElements'>
-              <div className='elementPhoto'>Foto</div>
+              <div className='elementPhoto'>
+                <Image
+                  src={'/foto1.jpg'}
+                  className='elementPhotoImage'
+                  width={500}
+                  height={500}
+                />
+              </div>
               <div className='container'>
                 <h3>Heading</h3>
                 <p>Some Text</p>
               </div>
             </div>
-            <div className='pElements'>Merhaba</div>
-            <div className='pElements'>Merhaba</div>
-            <div className='pElements'>Merhaba</div>
+            <div className='pElements'>
+              <div className='elementPhoto'>
+                <Image
+                  src={'/foto1.jpg'}
+                  className='elementPhotoImage'
+                  width={500}
+                  height={500}
+                />
+              </div>
+              <div className='container'>
+                <h3>Heading</h3>
+                <p>Some Text</p>
+              </div>
+            </div>
+            <div className='pElements'>
+              <div className='elementPhoto'>
+                <Image
+                  src={'/foto1.jpg'}
+                  className='elementPhotoImage'
+                  width={500}
+                  height={500}
+                />
+              </div>
+              <div className='container'>
+                <h3>Heading</h3>
+                <p>Some Text</p>
+              </div>
+            </div>
+            <div className='pElements'>
+              <div className='elementPhoto'>
+                <Image
+                  src={'/foto1.jpg'}
+                  className='elementPhotoImage'
+                  width={500}
+                  height={500}
+                />
+              </div>
+              <div className='container'>
+                <h3>Heading</h3>
+                <p>Some Text</p>
+              </div>
+            </div>
           </div>
       </main>
     )

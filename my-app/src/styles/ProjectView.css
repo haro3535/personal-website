@@ -19,14 +19,15 @@
   .projectGalary{
     width: 85vw;
     height: 60vh;
+    overflow: auto;
     margin-top: 3rem;
     padding-left: 3rem;
   }
   .pElements{
     width: 100%;
     height: auto;
-    border: 1px solid black;
-    margin-bottom: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px 0px;
+    margin-bottom: 0.5rem;
     display: flex;
   }
   .pMiddle{
@@ -48,8 +49,13 @@
 }
 
 .elementPhoto{
-  width: 8rem;
-  height: 8rem;
+  width: 12rem;
+  height: 7rem;
+}
+
+.elementPhotoImage{
+  width: 12rem;
+  height: 7rem;
 }
 
 .myLink:hover{

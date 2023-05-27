@@ -87,7 +87,7 @@ body {
 }
 
 body::-webkit-scrollbar {
-  display: none;
+  
 }
 
 a {
@@ -98,5 +98,8 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     
+  }
+  body.adaptive{
+    background-color: #212A3E;
   }
 }

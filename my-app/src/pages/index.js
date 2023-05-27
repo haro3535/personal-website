@@ -8,11 +8,13 @@ import ProjectsView from './projectView'
 import MyAccounts from './socialAccounts'
 import AboutView from './aboutView'
 import Footer from './footer'
+import { createElement } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 //Color pattern link https://colorhunt.co/palette/f1f6f9394867212a3e9ba4b5
 
 export default function Home() {
+
   return (
     <>
       <Head>
@@ -21,20 +23,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`} 
-      style={
-        {
-          width: 100 + "vw",
-          height: 100 + "vh",
-          objectFit: "contain",
-          objectPosition: "center", 
-        }}>
-        <Image
-          src={"/pp.jpg"}
-          style={{zIndex: -1, position: "absolute"}}
-          fill={true}
-          priority={true}
-        />
+      <main className={`${styles.main} ${inter.className}`}>
+        <div className={`${styles.mode}`}>
+          <i className="bi bi-moon-fill fs-5" id='moon'></i>
+          <i className="bi bi-sun-fill fs-5" id='sun'></i>
+        </div>
         <div className={`${styles.leftDiv}`}>
         <Image
             src={"/pp.jpg"}
@@ -74,3 +67,5 @@ export default function Home() {
     </>
   )
 }
+
+
