@@ -27,3 +27,16 @@ export default function AboutView(){
         </>
     )
 };
+
+
+/*
+İngilizcesi
+
+Hello,
+
+I'm Harun, 20 years old. I was born in Bornova, Izmir, and I have been living in Izmir since I was born. I attended Attaroğlu Primary School for my elementary education. After completing elementary school, I went to Çamkıran Middle School, and then I attended Suphi Koyuncuoğlu Anatolian High School for my high school education. Now, I am a second-year student studying Computer Engineering at Izmir University of Economics.
+
+I started coding in 2020 before the university entrance exam. I began with HTML and continued with CSS. Later, I studied JavaScript for backend development. When I entered university, I received training in Java as a programming language. Additionally, I have worked with different languages and frameworks such as NodeJS, Flutter, Python, MySQL, MongoDB, and Arduino. In the future, I plan to learn new languages and frameworks.
+
+My career goal is to gain experience in various important fields and use that experience to reduce my country's external dependence to some extent. Examples of these fields could be the finance sector, artificial intelligence, and the space industry. However, it's uncertain what the future holds...
+ */
