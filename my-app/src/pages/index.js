@@ -8,12 +8,26 @@ import ProjectsView from './projectView'
 import MyAccounts from './socialAccounts'
 import AboutView from './aboutView'
 import Footer from './footer'
-import { createElement } from 'react'
+import { createElement, useState } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 //Color pattern link https://colorhunt.co/palette/f1f6f9394867212a3e9ba4b5
 
 export default function Home() {
+
+  const [moon, setMoon] = useState('none');
+  const [sun, setSun] = useState('block');
+
+  function changeDisplay(){
+    if (moon == 'block') {
+      setMoon('none')
+      setSun('block')
+    }
+    else {
+      setSun('none')
+      setMoon('block')
+    }
+  }
 
   return (
     <>
@@ -25,8 +39,8 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={`${styles.mode}`}>
-          <i className="bi bi-moon-fill fs-5" id='moon'></i>
-          <i className="bi bi-sun-fill fs-5" id='sun'></i>
+          <i className="bi bi-moon-fill fs-5" id='moon' onClick={() => changeDisplay()} style={{display: `${moon}`}}></i>
+          <i className="bi bi-sun-fill fs-5" id='sun' onClick={() => changeDisplay()} style={{display: `${sun}`}}></i>
         </div>
         <div className={`${styles.leftDiv}`}>
         <Image
