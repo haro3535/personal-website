@@ -21,8 +21,6 @@ export default function ProjectsView(){
     )
 }
 
-
-
 function DisplayProjects(){
 
   const { data, error, isLoading } = useSWR('/api/root', fetcher);
