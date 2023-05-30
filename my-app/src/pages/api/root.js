@@ -2,27 +2,31 @@
 import path from 'path';
 import { promises as fs } from 'fs';
 
-async function sendJSONData(){
-
-  const dataPath = path.join(process.cwd(), 'src/pages/api/projects/');
-
-  const jsonFile = await fs.readFile(dataPath + 'projects.json','utf-8');
-
-  return jsonFile;
-}
-
-
 export default async function handler(req, res) {
 
   try{
     const data = await sendJSONData();
+    console.log(JSON.parse(data))
+  
 
-    const serialized = JSON.stringify(data);
-
-    res.status(200).json(serialized)
+    res.status(200).json(data)
   }catch(err){
     res.status(500).json({error: 'failed to load data'})
   }
 }
 
+
+async function sendJSONData(){
+
+  const dataPath = path.join(process.cwd(), 'src/pages/api/data/');
+
+  const projects = await fs.readFile(dataPath + 'projects.json','utf-8');
+
+  const views = await fs.readFile(dataPath + 'view.json','utf-8');
+
+  const mergeData = {projects,views}
+  const serialized = JSON.stringify(mergeData);
+
+  return serialized;
+}
 

@@ -29,8 +29,8 @@ function DisplayProjects(){
 
   if (isLoading) return <div>Loading...</div>;
 
-    const unserialize = JSON.parse(data);
-    const parsedData = JSON.parse(unserialize);
+    const parsedData = JSON.parse(data);
+    console.log(parsedData)
 
     if(parsedData == null) return <h4> No Project </h4>
 

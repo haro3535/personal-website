@@ -1,0 +1,14 @@
+{
+    "view": [
+        {
+            "main-color": "#F1F6F9",
+            "second-color": "#394867",
+            "third-color": "#212A3E"
+        },
+        {
+            "main-color": "#394867",
+            "second-color": "#212A3E",
+            "third-color": "#F1F6F9"
+        }
+    ]
+}
