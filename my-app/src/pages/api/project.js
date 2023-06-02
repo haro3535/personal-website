@@ -4,15 +4,17 @@ import { promises as fs } from 'fs';
 
 export default async function handler(req, res) {
 
-  try{
-    const data = await sendJSONData();
-    console.log(JSON.parse(data))
+  if (req.method === 'GET') {
+    try{
+      const data = await sendJSONData();
   
-
-    res.status(200).json(data)
-  }catch(err){
-    res.status(500).json({error: 'failed to load data'})
+      res.status(200).json(data)
+    }catch(err) {
+      res.status(500).json({error: 'failed to load data'})
+    }
   }
+
+  res.status(200).end();
 }
 
 
@@ -22,10 +24,7 @@ async function sendJSONData(){
 
   const projects = await fs.readFile(dataPath + 'projects.json','utf-8');
 
-  const views = await fs.readFile(dataPath + 'view.json','utf-8');
-
-  const mergeData = {projects,views}
-  const serialized = JSON.stringify(mergeData);
+  const serialized = JSON.stringify(projects);
 
   return serialized;
 }

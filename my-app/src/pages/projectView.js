@@ -4,10 +4,10 @@ import Image from 'next/image'
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
-export default function ProjectsView(){
+export default function ProjectsView({ view }){
 
     return(
-        <main id='projectsView' className="projects">
+        <main id='projectsView' className="projects" style={{backgroundColor: view.main_color, color: view.third_color}}>
           <div className="projectDiv">
             <h1 className="ph1">My Projects</h1>
             <p className="pp">You can see all of my project at below.</p>
@@ -23,14 +23,13 @@ export default function ProjectsView(){
 
 function DisplayProjects(){
 
-  const { data, error, isLoading } = useSWR('/api/root', fetcher);
+  const { data, error, isLoading } = useSWR('/api/project', fetcher);
 
   if (error) return <div>Failed to load</div>;
 
   if (isLoading) return <div>Loading...</div>;
 
-    const parsedData = JSON.parse(data);
-    console.log(parsedData)
+    const parsedData = JSON.parse(JSON.parse(data));
 
     if(parsedData == null) return <h4> No Project </h4>
 
@@ -48,7 +47,7 @@ function DisplayProjects(){
                 priority={true}
               />
             </div>
-            <div className='container'>
+            <div className='container' style={{backgroundColor: '#F1F6F9', color: "black"}}>
               <h3>{parsedData.project[index].header}</h3>
               <p>{parsedData.project[index].desc}</p>
             </div>

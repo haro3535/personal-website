@@ -1,9 +1,9 @@
 
 
-export default function AboutView(){
+export default function AboutView({ view }){
     return(
         <>
-            <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about">
+            <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: view.main_color, color: view.third_color}}>
                 <div className="container h-auto vw-70">
                     <h3>Hakkımda</h3>
                     <br/>

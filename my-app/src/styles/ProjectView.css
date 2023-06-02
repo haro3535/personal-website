@@ -58,6 +58,11 @@
   height: 7rem;
 }
 
+.socialAccounts, .footer{
+  background-color: #394867;
+}
+
+
 .myLink:hover{
   background-color: #F1F6F9;
   color: #394867;

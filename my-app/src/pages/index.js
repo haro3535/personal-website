@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Script from 'next/script'
 import Link from 'next/link'
+import useSWR from 'swr';
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import ProjectsView from './projectView'
@@ -13,19 +14,27 @@ import { createElement, useState } from 'react'
 const inter = Inter({ subsets: ['latin'] })
 //Color pattern link https://colorhunt.co/palette/f1f6f9394867212a3e9ba4b5
 
+const fetcher = (url) => fetch(url).then((res) => res.json()); 
+
 export default function Home() {
+
+  const views = getView();
+
+  const [view , setView] = useState({});
 
   const [moon, setMoon] = useState('none');
   const [sun, setSun] = useState('block');
 
   function changeDisplay(){
-    if (moon == 'block') {
+    if (moon == 'block' && views != undefined) {
       setMoon('none')
       setSun('block')
+      setView(views.view[0])
     }
     else {
       setSun('none')
       setMoon('block')
+      setView(views.view[1])
     }
   }
 
@@ -42,7 +51,7 @@ export default function Home() {
           <i className="bi bi-moon-fill fs-5" id='moon' onClick={() => changeDisplay()} style={{display: `${moon}`}}></i>
           <i className="bi bi-sun-fill fs-5" id='sun' onClick={() => changeDisplay()} style={{display: `${sun}`}}></i>
         </div>
-        <div className={`${styles.leftDiv}`}>
+        <div className={`${styles.leftDiv}`} style={{backgroundColor: view.main_color}}>
         <Image
             src={"/pp.jpg"}
             alt='Picture of the author'
@@ -51,13 +60,13 @@ export default function Home() {
             height={500}
             priority={true}
           />
-          <div style={{paddingLeft: "5rem"}}>
+          <div style={{paddingLeft: "5rem", color: view.third_color}}>
             <h3>Harun Onur</h3>
             <p>Computer Engineering Student</p>
           </div>
         </div>
         <div className={`${styles.rightDiv}`}>
-          <div className={`${styles.rightMenu}`}>
+          <div className={`${styles.rightMenu}`} style={{backgroundColor: view.main_color, color: view.third_color}}>
             <div className={`${styles.rightMenuDiv}`}>
               <a href='#projectsView' className='text-reset text-decoration-none'>
                 <div className={`${styles.rightMenuDivElements}`}>
@@ -73,13 +82,26 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <ProjectsView></ProjectsView>
-      <MyAccounts></MyAccounts>
-      <AboutView></AboutView>
-      <Footer></Footer>
+      <ProjectsView view={view}></ProjectsView>
+      <MyAccounts view={view}></MyAccounts>
+      <AboutView view={view}></AboutView>
+      <Footer view={view}></Footer>
       
     </>
   )
 }
 
 
+function getView(){
+
+  const { data, error, isLoading} = useSWR('/api/view', fetcher)
+
+  if(error) console.log(error)
+
+  //if(isLoading) console.log('Loading')
+
+  if (!isLoading) {
+      const css = JSON.parse(JSON.parse(data))
+      return css
+  }
+}

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 
 
-export default function MyAccounts(){
+export default function MyAccounts({ view }){
 
     return(
         <>
-            <div className="container-fluid m-0 text-white " style={{height: 15 + "vh", backgroundColor: "#394867", color: "#F1F6F9"}}>
+            <div className="container-fluid m-0 text-white socialAccounts" style={{height: 15 + "vh", backgroundColor: view.second_color, color: "#F1F6F9"}}>
                 <div className="row h-100">
                     <div className="col-sm d-flex justify-content-center align-items-center myLink">
                         <a href="https://github.com/haro3535" target="_blank" className="pe-auto text-reset text-decoration-none">

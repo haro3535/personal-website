@@ -102,11 +102,20 @@
   transition: ease-in-out 0.25s;
 }
 
-@keyframes hoverEffect {
-  0%{
+.color1{
+  background-color: #F1F6F9;
+}
 
-  }
-  100%{}
+.color2{
+  background-color: #394867;
+}
+
+.color3{
+  background-color: #212A3E;
+}
+
+.text-color{
+  color: black;
 }
 
 
