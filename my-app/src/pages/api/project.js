@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try{
-      const data = await sendJSONData();
+      const data = await sendJSONData1q();
   
       res.status(200).json(data)
     }catch(err) {
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 }
 
 
-async function sendJSONData(){
+async function sendJSONData1q(){
 
   const dataPath = path.join(process.cwd(), 'src/pages/api/data/');
 
