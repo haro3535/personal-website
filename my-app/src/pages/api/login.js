@@ -10,7 +10,7 @@ export default async function handler(req,res){
 
             const flag = await checkAdmin(req.body);
 
-            if(flag) res.redirect('/',300);
+            if(flag) res.redirect('/admin',300);
             else res.redirect('/login');
             
         }catch(err) {
@@ -32,9 +32,14 @@ async function checkAdmin(body){
 
     const parsed = JSON.parse(admin);
     
-    const {uname, password} = parsed.admin[0];
+    const {uname, password, isLogged} = parsed.admin[0];
     
     if (uname == body.username && password == body.password) {
+        
+        parsed.admin[0].isLogged = true;
+
+        await fs.writeFile(dataPath + 'admin.json', JSON.stringify(parsed.admin[0],null,2));
+
         return true;
     }
     else return false

@@ -46,10 +46,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={`${styles.main} ${inter.className}`} style={{color: view.third_color}}>
         <div className={`${styles.mode}`}>
           <i className="bi bi-moon-fill fs-5" id='moon' onClick={() => changeDisplay()} style={{display: `${moon}`}}></i>
-          <i className="bi bi-sun-fill fs-5" id='sun' onClick={() => changeDisplay()} style={{display: `${sun}`}}></i>
+          <i className="bi bi-sun-fill fs-5" id='sun' onClick={() => changeDisplay()} style={{display: `${sun}`, color: '#394867'}}></i>
         </div>
         <div className={`${styles.leftDiv}`} style={{backgroundColor: view.main_color}}>
         <Image
@@ -65,16 +65,16 @@ export default function Home() {
             <p>Computer Engineering Student</p>
           </div>
         </div>
-        <div className={`${styles.rightDiv}`}>
-          <div className={`${styles.rightMenu}`} style={{backgroundColor: view.main_color, color: view.third_color}}>
+        <div className={`${styles.rightDiv}`} style={{backgroundColor: view.main_color}}>
+          <div className={`${styles.rightMenu}`} style={{color: view.third_color}}>
             <div className={`${styles.rightMenuDiv}`}>
               <a href='#projectsView' className='text-reset text-decoration-none'>
-                <div className={`${styles.rightMenuDivElements}`}>
+                <div className={`${styles.rightMenuDivElements}`} style={{color: view.third_color, backgroundColor: view.second}}>
                   <h5>Projects</h5>
                 </div>
               </a>
               <a href='#about' className='text-reset text-decoration-none'>
-                <div className={`${styles.rightMenuDivElements}`}>
+                <div className={`${styles.rightMenuDivElements}`} style={{color: view.third_color}}>
                   <h5>About Me</h5>
                 </div>
               </a>

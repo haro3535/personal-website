@@ -5,7 +5,7 @@
   align-items: center;
   min-height: 100vh;
   background-color: #F1F6F9;
-  border: 1px solid #394867;
+  border-bottom: 1px solid;
 }
 
 .mode{
@@ -54,7 +54,6 @@
   justify-content: center;
   align-items: center;
   z-index: 2;
-  background-color: #212A3E;
 }
 
 .rightMenu{
@@ -64,7 +63,13 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  background-color: #F1F6F9;
+    /* From https://css.glass */
+  background: rgba(241, 246, 249, 0.09);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(241, 246, 249, 0.4);
 }
 
 .rightMenuDiv{
@@ -96,9 +101,8 @@
 }
 
 .rightMenuDivElements:hover{
-  background-color: white;
-  color: black;
-  mix-blend-mode: difference;
+  background-color: #394867;
+  color: white;
   transition: ease-in-out 0.25s;
 }
 

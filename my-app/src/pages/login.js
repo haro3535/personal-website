@@ -11,7 +11,9 @@ export default function Login(){
   const router = useRouter();
 
   const handleUsernameChange = (event) => {
+    console.log(event.target.value)
     setUsername(event.target.value);
+    console.log(username)
   };
 
   const handlePasswordChange = (event) => {
@@ -20,6 +22,7 @@ export default function Login(){
 
   const handleSubmit = useCallback((event) => {
     event.preventDefault();
+    console.log(event)
     // Burada login işlemini yapabilirsiniz
     console.log('Username:', username);
     console.log('Password:', password);
@@ -37,7 +40,6 @@ export default function Login(){
               <input
                 type="text"
                 id="username"
-                value={username}
                 onChange={handleUsernameChange}
               />
             </div>
@@ -46,7 +48,6 @@ export default function Login(){
               <input
                 type="password"
                 id="password"
-                value={password}
                 onChange={handlePasswordChange}
               />
             </div>
@@ -65,6 +66,8 @@ function sendInfo(username, password,router){
     const hash = CryptoJS.SHA256(password);
     const encryptedPassword = hash.toString(CryptoJS.enc.Hex);
 
+    console.log(username)
+
     fetch('/api/login',{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -74,7 +77,7 @@ function sendInfo(username, password,router){
       }),
     })
     .then((res) => {
-      if(res.ok) router.push('/')
+      if(res.ok) router.push('/admin')
     })
     .catch((err) => console.log(err));
 }
