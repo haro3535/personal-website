@@ -10,17 +10,18 @@ import MyAccounts from './socialAccounts'
 import AboutView from './aboutView'
 import Footer from './footer'
 import { createElement, useState } from 'react'
+import Texture1 from './backgroundTexture1';
+import Texture2 from './backgroundTexture2';
 
 const inter = Inter({ subsets: ['latin'] })
 //Color pattern link https://colorhunt.co/palette/f1f6f9394867212a3e9ba4b5
 
 const fetcher = (url) => fetch(url).then((res) => res.json()); 
 
-export default function Home() {
+export default function Home({ views }) {
 
-  const views = getView();
-
-  const [view , setView] = useState({});
+  const [viewList , setViewList] = useState(views);
+  const [view , setView] = useState(viewList.view[0]);
 
   const [moon, setMoon] = useState('none');
   const [sun, setSun] = useState('block');
@@ -29,12 +30,12 @@ export default function Home() {
     if (moon == 'block' && views != undefined) {
       setMoon('none')
       setSun('block')
-      setView(views.view[0])
+      setView(viewList.view[0])
     }
     else {
       setSun('none')
       setMoon('block')
-      setView(views.view[1])
+      setView(viewList.view[1])
     }
   }
 
@@ -46,12 +47,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`} style={{color: view.third_color}}>
+      <main className={`${styles.main} ${inter.className}`} style={{color: view.tcolor}}>
+        <DisplayTexture texture={view.texture} />
         <div className={`${styles.mode}`}>
           <i className="bi bi-moon-fill fs-5" id='moon' onClick={() => changeDisplay()} style={{display: `${moon}`}}></i>
           <i className="bi bi-sun-fill fs-5" id='sun' onClick={() => changeDisplay()} style={{display: `${sun}`, color: '#394867'}}></i>
         </div>
-        <div className={`${styles.leftDiv}`} style={{backgroundColor: view.main_color}}>
+        <div className={`${styles.leftDiv}`}>
         <Image
             src={"/pp.jpg"}
             alt='Picture of the author'
@@ -60,21 +62,21 @@ export default function Home() {
             height={500}
             priority={true}
           />
-          <div style={{paddingLeft: "5rem", color: view.third_color}}>
+          <div style={{paddingLeft: "5rem", color: view.tcolor}}>
             <h3>Harun Onur</h3>
             <p>Computer Engineering Student</p>
           </div>
         </div>
-        <div className={`${styles.rightDiv}`} style={{backgroundColor: view.main_color}}>
-          <div className={`${styles.rightMenu}`} style={{color: view.third_color}}>
+        <div className={`${styles.rightDiv}`}>
+          <div className={`${styles.rightMenu}`} style={{color: view.tcolor}}>
             <div className={`${styles.rightMenuDiv}`}>
               <a href='#projectsView' className='text-reset text-decoration-none'>
-                <div className={`${styles.rightMenuDivElements}`} style={{color: view.third_color, backgroundColor: view.second}}>
+                <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
                   <h5>Projects</h5>
                 </div>
               </a>
               <a href='#about' className='text-reset text-decoration-none'>
-                <div className={`${styles.rightMenuDivElements}`} style={{color: view.third_color}}>
+                <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
                   <h5>About Me</h5>
                 </div>
               </a>
@@ -92,7 +94,32 @@ export default function Home() {
 }
 
 
-function getView(){
+
+export async function getStaticProps(){
+
+  const res = await fetch('http://localhost:3000/api/view');
+  const views = await res.json();
+
+  console.log(JSON.parse(views))
+
+  return{
+    props:{
+      views: JSON.parse(views),
+    },
+  }
+}
+
+function DisplayTexture({ texture }){
+
+  if (texture == 0) {
+    return <Texture1></Texture1>
+  }
+  
+  return <Texture2></Texture2>
+}
+
+
+/*function getView(){
 
   const { data, error, isLoading} = useSWR('/api/view', fetcher)
 
@@ -105,3 +132,5 @@ function getView(){
       return css
   }
 }
+
+*/

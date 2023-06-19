@@ -11,9 +11,7 @@ export default async function handler(req,res){
 
             const jData = await fs.readFile(getPath + 'views.json','utf-8');
 
-            const sData = JSON.stringify(jData)
-
-            res.status(200).json(sData);
+            res.status(200).json(jData);
         }catch(err){
             res.status(500).end();
         }

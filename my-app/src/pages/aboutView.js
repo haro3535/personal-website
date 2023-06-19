@@ -1,9 +1,23 @@
-
+import { useState } from "react"
+import Image from 'next/image'
 
 export default function AboutView({ view }){
+
+    const [displayWhite , setDisplayWhite] = useState('flex');
+    const [displayBlue , setDisplayBlue] = useState('none');
+
+    if (view.texture == 0 && displayWhite != 'flex') {
+        setDisplayWhite('flex')
+        setDisplayBlue('none')
+    }
+    else if (view.texture == 1 && displayWhite != 'none'){
+        setDisplayWhite('none')
+        setDisplayBlue('flex')
+    }
+
     return(
         <>
-            <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: view.main_color, color: view.third_color}}>
+            <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: view.texture, color: view.tcolor}}>
                 <div className="container h-auto vw-70">
                     <h3>Hakkımda</h3>
                     <br/>
@@ -23,6 +37,20 @@ export default function AboutView({ view }){
                         bunlar; <b>finans sektörü</b>, <b>yapay zeka</b> ve <b>uzay endüstrisi</b> gibi alanlar olabilir. Ama geleceğin ne getireceği belli olmaz...
                     </p>
                 </div>
+                <Image
+                    src={'/arches.png'}
+                    alt='Background Texture'
+                    style={{display: displayWhite}}
+                    quality={100}
+                    fill={true}
+                />
+                <Image
+                    src={'/low-contrast-linen.png'}
+                    alt='Background Texture'
+                    style={{display: displayBlue}}
+                    quality={100}
+                    fill={true}
+                />
             </main>
         </>
     )

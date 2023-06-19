@@ -1,13 +1,20 @@
 import useSWR from 'swr';
 import Image from 'next/image'
+import { useState } from "react"
+import Texture1 from './backgroundTexture1';
+import Texture2 from './backgroundTexture2';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
 export default function ProjectsView({ view }){
 
+
+  const [texture , setTexture] = useState(view.texture); 
+
     return(
-        <main id='projectsView' className="projects" style={{backgroundColor: view.main_color, color: view.third_color}}>
+        <main id='projectsView' className="projects" style={{color: view.tcolor}}>
+          <DisplayTexture texture={texture} />
           <div className="projectDiv">
             <h1 className="ph1">My Projects</h1>
             <p className="pp">You can see all of my project at below.</p>
@@ -19,6 +26,15 @@ export default function ProjectsView({ view }){
           <DisplayProjects />
       </main>
     )
+}
+
+function DisplayTexture({ texture }){
+
+  if (texture == 0) {
+    return <Texture1></Texture1>
+  }
+  
+  return <Texture2></Texture2>
 }
 
 function DisplayProjects(){
