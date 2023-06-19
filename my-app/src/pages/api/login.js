@@ -4,19 +4,23 @@ import { promises as fs } from 'fs';
 
 export default async function handler(req,res){
 
-    if (req.method === 'POST') {
         try{
+            console.log('salam')
             console.log(req.body)
+            
 
             const flag = await checkAdmin(req.body);
 
-            if(flag) res.redirect('/admin',300);
+            console.log('merhabalar ' + flag)
+            
+
+            if(flag) res.redirect('/admin',307);
             else res.redirect('/login');
             
         }catch(err) {
             res.status(500).json({error: 'failed to load data'})
         }
-      }
+
     
       res.status(200).end();
     
@@ -27,18 +31,16 @@ export default async function handler(req,res){
 async function checkAdmin(body){
 
     const dataPath = path.join(process.cwd(), 'src/pages/api/data/');
-  
     const admin = await fs.readFile(dataPath + 'admin.json','utf-8');
-
     const parsed = JSON.parse(admin);
     
-    const {uname, password, isLogged} = parsed.admin[0];
+    let {uname, password, isLogged} = parsed;
     
     if (uname == body.username && password == body.password) {
         
-        parsed.admin[0].isLogged = true;
+        isLogged = true;
 
-        await fs.writeFile(dataPath + 'admin.json', JSON.stringify(parsed.admin[0],null,2));
+        await fs.writeFile(dataPath + 'admin.json', JSON.stringify(parsed,null,2));
 
         return true;
     }

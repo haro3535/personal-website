@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState} from "react";
 import { useRouter } from "next/router";
 import useSWR from 'swr';
 const CryptoJS = require('crypto-js');
@@ -20,15 +20,14 @@ export default function Login(){
     setPassword(event.target.value);
   };
 
-  const handleSubmit = useCallback((event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     console.log(event)
     // Burada login işlemini yapabilirsiniz
     console.log('Username:', username);
     console.log('Password:', password);
     sendInfo(username,password,router);
-    
-  }, []);
+  };
 
   return (
     <div className="app-container">
@@ -66,8 +65,6 @@ function sendInfo(username, password,router){
     const hash = CryptoJS.SHA256(password);
     const encryptedPassword = hash.toString(CryptoJS.enc.Hex);
 
-    console.log(username)
-
     fetch('/api/login',{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -77,7 +74,11 @@ function sendInfo(username, password,router){
       }),
     })
     .then((res) => {
-      if(res.ok) router.push('/admin')
+      if (res.ok) {
+        alert('maafaka')
+      }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log('aaaa'));
+
+    
 }

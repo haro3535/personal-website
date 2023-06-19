@@ -21,7 +21,7 @@ export default function Admin({ admin }){
 
     useEffect(() => {
         const parsedInfo = JSON.parse(admin);
-        if (parsedInfo.admin[0].isLogged == false) {
+        if (parsedInfo.isLogged == false) {
             router.push('http://localhost:3000/login')
         }
         else {

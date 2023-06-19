@@ -8,13 +8,9 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
 export default function ProjectsView({ view }){
-
-
-  const [texture , setTexture] = useState(view.texture); 
-
     return(
         <main id='projectsView' className="projects" style={{color: view.tcolor}}>
-          <DisplayTexture texture={texture} />
+          <DisplayTexture texture={view.texture} />
           <div className="projectDiv">
             <h1 className="ph1">My Projects</h1>
             <p className="pp">You can see all of my project at below.</p>

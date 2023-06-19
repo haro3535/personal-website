@@ -1,5 +1,7 @@
 import { useState } from "react"
 import Image from 'next/image'
+import Texture1 from './backgroundTexture1';
+import Texture2 from './backgroundTexture2';
 
 export default function AboutView({ view }){
 
@@ -18,7 +20,7 @@ export default function AboutView({ view }){
     return(
         <>
             <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: view.texture, color: view.tcolor}}>
-                <div className="container h-auto vw-70">
+                <div className="container h-auto vw-70" style={{zIndex: '2'}}>
                     <h3>Hakkımda</h3>
                     <br/>
                     <p>Merhabalar,</p>
@@ -37,24 +39,21 @@ export default function AboutView({ view }){
                         bunlar; <b>finans sektörü</b>, <b>yapay zeka</b> ve <b>uzay endüstrisi</b> gibi alanlar olabilir. Ama geleceğin ne getireceği belli olmaz...
                     </p>
                 </div>
-                <Image
-                    src={'/arches.png'}
-                    alt='Background Texture'
-                    style={{display: displayWhite}}
-                    quality={100}
-                    fill={true}
-                />
-                <Image
-                    src={'/low-contrast-linen.png'}
-                    alt='Background Texture'
-                    style={{display: displayBlue}}
-                    quality={100}
-                    fill={true}
-                />
+                <DisplayTexture texture={view.texture}/>
             </main>
         </>
     )
 };
+
+
+function DisplayTexture({ texture }){
+
+    if (texture == 0) {
+      return <Texture1></Texture1>
+    }
+    
+    return <Texture2></Texture2>
+  }
 
 
 /*

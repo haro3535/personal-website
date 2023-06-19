@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 function Texture2(){
     return (
-        <div>
+        <div style={{width: '100vw', height: '100vh', position: 'absolute', zIndex: '-1'}}>
           <Image
             src="/low-contrast-linen.png"
             alt="Backgorund Texture2"
