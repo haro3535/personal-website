@@ -11,9 +11,7 @@ export default function Login(){
   const router = useRouter();
 
   const handleUsernameChange = (event) => {
-    console.log(event.target.value)
     setUsername(event.target.value);
-    console.log(username)
   };
 
   const handlePasswordChange = (event) => {
@@ -22,11 +20,29 @@ export default function Login(){
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event)
-    // Burada login işlemini yapabilirsiniz
-    console.log('Username:', username);
-    console.log('Password:', password);
-    sendInfo(username,password,router);
+    
+    const hash = CryptoJS.SHA256(password);
+    const encryptedPassword = hash.toString(CryptoJS.enc.Hex);
+
+    fetch('/api/login',{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: username,
+        password: encryptedPassword,
+      }),
+    })
+    .then((res) => {
+      
+      res.json().then((succeed) => {
+        if (succeed) {
+          router.push('http://localhost:3000/admin')
+          console.log('resokey')
+        }
+        else console.log('its not okey')
+      })
+    })
+    .catch((err) => console.log(err));
   };
 
   return (
@@ -56,29 +72,3 @@ export default function Login(){
     </div>
   );
 };
-
-
-
-
-function sendInfo(username, password,router){
-
-    const hash = CryptoJS.SHA256(password);
-    const encryptedPassword = hash.toString(CryptoJS.enc.Hex);
-
-    fetch('/api/login',{
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: username,
-        password: encryptedPassword,
-      }),
-    })
-    .then((res) => {
-      if (res.ok) {
-        alert('maafaka')
-      }
-    })
-    .catch((err) => console.log('aaaa'));
-
-    
-}

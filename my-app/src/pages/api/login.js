@@ -5,25 +5,13 @@ import { promises as fs } from 'fs';
 export default async function handler(req,res){
 
         try{
-            console.log('salam')
-            console.log(req.body)
-            
-
             const flag = await checkAdmin(req.body);
 
-            console.log('merhabalar ' + flag)
-            
-
-            if(flag) res.redirect('/admin',307);
-            else res.redirect('/login');
+            res.status(200).json({succeed: flag});
             
         }catch(err) {
             res.status(500).json({error: 'failed to load data'})
         }
-
-    
-      res.status(200).end();
-    
 }
 
 
@@ -40,7 +28,12 @@ async function checkAdmin(body){
         
         isLogged = true;
 
-        await fs.writeFile(dataPath + 'admin.json', JSON.stringify(parsed,null,2));
+        const updatedJSON = {
+            "name": uname,
+            "password": password,
+            "isLogged": isLogged,
+        }
+        await fs.writeFile(dataPath + 'admin.json', JSON.stringify(updatedJSON,null,2),'utf-8');
 
         return true;
     }

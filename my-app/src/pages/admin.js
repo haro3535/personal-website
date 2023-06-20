@@ -29,7 +29,23 @@ export default function Admin({ admin }){
         }
     })
 
-    return <div>Admin</div>
+    return(
+        <>
+            <main>
+                <nav>
+
+                </nav>
+                <div style={{width: '100vw', height: '100vh',display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <div className="project-info" style={{width: '20vw', height: '30vh'}}>
+                        <label>Proje Adı:</label>
+                        <input type="text"></input>
+                        <label>Proje Açıklması:</label>
+                        <input type="text"></input>
+                    </div>
+                </div>
+            </main>
+        </>
+    )
 
     
 
