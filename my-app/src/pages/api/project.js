@@ -24,8 +24,6 @@ async function sendJSONData(){
 
   const projects = await fs.readFile(dataPath + 'projects.json','utf-8');
 
-  const serialized = JSON.stringify(projects);
-
-  return serialized;
+  return projects;
 }
 
