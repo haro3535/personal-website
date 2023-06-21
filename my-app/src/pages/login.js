@@ -1,14 +1,21 @@
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import { useRouter } from "next/router";
 import useSWR from 'swr';
 const CryptoJS = require('crypto-js');
 
 
-export default function Login(){
+export default function Login({ admin }){
     
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+
+  useEffect(() => {
+    const parsedInfo = JSON.parse(admin);
+    if (parsedInfo.isLogged == true) {
+        router.push('http://localhost:3000/admin')
+    }
+})
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -72,3 +79,16 @@ export default function Login(){
     </div>
   );
 };
+
+
+
+export async function getStaticProps(){
+  const res = await fetch('http://localhost:3000/api/check');
+  const admin = await res.json();
+
+  return{
+      props: {
+          admin,
+      },
+  }
+}

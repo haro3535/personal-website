@@ -1,0 +1,29 @@
+
+.left-menu{
+    width: 100%;
+    height: auto;
+    border: 1px solid black;
+}
+
+.left-menu-elements{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+
+.right-panel{
+    width: 80vw;
+    height: 100vh;
+    padding-left: 2rem;
+    padding-top: 2rem;
+    padding-right: 5rem;
+    background-color: gainsboro;
+}
+
+.project-list{
+    width: auto;
+    height: 50vh;
+    border: 1px solid black;
+    margin-top: 3rem;
+}
