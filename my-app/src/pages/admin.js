@@ -5,7 +5,7 @@ import Image from 'next/image'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export async function getStaticProps(){
+export async function getSeverSideProps(){
     const res = await fetch('http://localhost:3000/api/check');
     const admin = await res.json();
 
@@ -20,7 +20,6 @@ export default function Admin({ admin }){
     const router = useRouter();
     const [flag, setFlag] = useState(false);
     const [search, setSearch] = useState('');
-
 
     useEffect(() => {
         const parsedInfo = JSON.parse(admin);
@@ -44,6 +43,11 @@ export default function Admin({ admin }){
                 </nav>
                 <div style={{width: '100vw', height: '100vh',display: 'flex'}}>
                     <div className="left-panel" style={{width: '20vw', height: '100vh', border: '1px solid black'}}>
+                        <div className="log-panel">
+                            <div className="iconWrapper logoutIcon"  onClick={() => logout(router)}>
+                                <i className="bi bi-box-arrow-left fs-4"></i>
+                            </div>
+                        </div>
                         <div className="left-menu">
                             <div className="left-menu-elements" onClick={() => displayProjects()}>Projects</div>
                             <div className="left-menu-elements"></div>
@@ -98,6 +102,14 @@ function DisplayProjectsForAdmin({ search }){
                     <h3>{parsedData.project[index].header}</h3>
                     <p>{parsedData.project[index].desc}</p>
                   </div>
+                  <div className="edit-buttons">
+                    <div className="iconWrapper trashIcons" onClick={() => deletePopup(index)}>
+                        <i className="bi bi-trash fs-5"></i>
+                    </div>
+                    <div className="iconWrapper pencilIcons" onClick={() => console.log('clicked')}>
+                        <i className="bi bi-pencil fs-5"></i>
+                    </div>
+                  </div>
               </div>
             )
           }
@@ -124,4 +136,39 @@ function DisplayProjectsForAdmin({ search }){
             </>
         )
     }
+}
+
+
+
+
+function deletePopup(key){
+
+    if (confirm('Silmek istiyor musunuz?')) {
+        
+        fetch('/api/controlPanel', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                index: key,
+            }),
+        })
+        .then(res => {
+            if(res.ok) alert('Proje Silindi!')
+            else alert('Hata oluştu!')
+        })
+        .catch(err => console.log(err));
+    }
+}
+
+
+function logout(router){
+
+    fetch('/api/logout', {
+        method: 'GET',
+    })
+    .then(res => {
+        if(res.ok) router.push('http://localhost:3000/login')
+        else alert('Hesaptan çıkılamadı!')
+    })
+    .catch(err => console.log(err))
 }

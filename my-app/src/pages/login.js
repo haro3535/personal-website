@@ -82,7 +82,7 @@ export default function Login({ admin }){
 
 
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
   const res = await fetch('http://localhost:3000/api/check');
   const admin = await res.json();
 
