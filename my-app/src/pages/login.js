@@ -11,9 +11,11 @@ export default function Login({ admin }){
   const router = useRouter();
 
   useEffect(() => {
-    const parsedInfo = JSON.parse(admin);
-    if (parsedInfo.isLogged == true) {
+    if (admin !== undefined) {
+      const parsedInfo = JSON.parse(admin);
+      if (parsedInfo.isLogged == true) {
         router.push('http://localhost:3000/admin')
+      }
     }
 })
 
@@ -82,13 +84,13 @@ export default function Login({ admin }){
 
 
 
-export async function getServerSideProps(){
+export const getServerSideProps = async () => {
   const res = await fetch('http://localhost:3000/api/check');
   const admin = await res.json();
 
   return{
       props: {
-          admin,
+          admin: admin,
       },
   }
 }

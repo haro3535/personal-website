@@ -22,14 +22,14 @@ async function checkAdmin(body){
     const admin = await fs.readFile(dataPath + 'admin.json','utf-8');
     const parsed = JSON.parse(admin);
     
-    let {uname, password, isLogged} = parsed;
+    let {name, password, isLogged} = parsed;
     
-    if (uname == body.username && password == body.password) {
+    if (name == body.username && password == body.password) {
         
         isLogged = true;
 
         const updatedJSON = {
-            "name": uname,
+            "name": name,
             "password": password,
             "isLogged": isLogged,
         }

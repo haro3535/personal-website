@@ -25,5 +25,7 @@ async function checkAdminInfo(){
 
     const readFile = await fs.readFile(dataPath + 'admin.json','utf-8');
 
+    console.log(readFile)
+
     return readFile;
 }

@@ -2,32 +2,29 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import useSWR from 'swr';
 import Image from 'next/image'
+import Menus from "./Menus";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
-
-export async function getSeverSideProps(){
-    const res = await fetch('http://localhost:3000/api/check');
-    const admin = await res.json();
-
-    return{
-        props: {
-            admin,
-        },
-    }
-}
 
 export default function Admin({ admin }){
     const router = useRouter();
     const [flag, setFlag] = useState(false);
     const [search, setSearch] = useState('');
+    const [display, setDisplay] = useState(0);
+    const [close, setClose] = useState('none')
+    // 0 closes all popups
+    // 1 is for the add popup
+    // 2 is for the update popup
 
     useEffect(() => {
         const parsedInfo = JSON.parse(admin);
-        if (parsedInfo.isLogged == false) {
-            router.push('http://localhost:3000/login')
-        }
-        else {
-            setFlag(true)
+        if (admin != undefined) {
+            if (parsedInfo.isLogged == false) {
+                router.push('http://localhost:3000/login')
+            }
+            else {
+                setFlag(true)
+            }
         }
     })
 
@@ -37,10 +34,7 @@ export default function Admin({ admin }){
 
     return(
         <>
-            <main>
-                <nav>
-
-                </nav>
+            <main style={{display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-end'}}>
                 <div style={{width: '100vw', height: '100vh',display: 'flex'}}>
                     <div className="left-panel" style={{width: '20vw', height: '100vh', border: '1px solid black'}}>
                         <div className="log-panel">
@@ -60,11 +54,18 @@ export default function Admin({ admin }){
                                 <input type="text" className="form-control" placeholder="Proje Adı" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={(value) => handleSearch(value)} />
                             </div>
                             <div className="project-list">
+                            <div className="add-row">
+                                <i className="bi bi-plus-circle-dotted fs-3" onClick={() => {setDisplay(1),setClose('flex')}} style={{cursor: 'pointer'}}></i>
+                            </div>
                                 <DisplayProjectsForAdmin search={search} />
                             </div>
                         </div>
                     </div>
                 </div>
+                <Menus display={display}></Menus>
+                    <div className="close-wrapper" style={{display: close}}>
+                        <i className="bi bi-x-lg fs-3 closeIcon" onClick={() => {setDisplay(0),setClose('none')}}></i>
+                    </div>
             </main>
         </>
     )
@@ -139,8 +140,6 @@ function DisplayProjectsForAdmin({ search }){
 }
 
 
-
-
 function deletePopup(key){
 
     if (confirm('Silmek istiyor musunuz?')) {
@@ -172,3 +171,15 @@ function logout(router){
     })
     .catch(err => console.log(err))
 }
+
+
+export const getServerSideProps = async () => {
+    const res = await fetch('http://localhost:3000/api/check');
+    const admin = await res.json();
+  
+    return{
+        props: {
+            admin: admin,
+        },
+    }
+  }
