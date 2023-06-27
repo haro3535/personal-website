@@ -20,12 +20,15 @@ export default function Menus({ display }){
 
         console.log(body)
 
-        fetch('/api/addProject', {
+        fetch('/api/upload', {
             method: 'POST',
             body: body,
         })
         .then((res) => {
-            if(res.ok) alert('Proje Kayıtedildi!')
+            if(res.ok){
+                const { fileUrl } = res.json();
+                console.log('Uploaded file URL:', fileUrl);
+            }
         })
         .catch(err => console.log(err))
 
@@ -40,10 +43,10 @@ export default function Menus({ display }){
                 <div className="popups-wrapper">
                     <div className="popups" id="add-popup">
                         <form onSubmit={handleSubmit} encType="multiple/form-data">
-                            <input type="text" placeholder="Başlık" style={{marginTop: '2rem'}}></input>
-                            <textarea placeholder="Açıklama" style={{resize: 'none', marginTop: '2rem', height: '5rem'}}></textarea>
-                            <input type="file" accept="image/*" style={{marginTop: '2rem'}}></input>
-                            <input type="text" placeholder="Link" style={{marginTop: '2rem'}}></input> 
+                            <input type="text" placeholder="Başlık" style={{marginTop: '2rem'}} required></input>
+                            <textarea placeholder="Açıklama" style={{resize: 'none', marginTop: '2rem', height: '5rem'}} required></textarea>
+                            <input type="file" accept="image/*" style={{marginTop: '2rem'}} required></input>
+                            <input type="text" placeholder="Link" style={{marginTop: '2rem'}} required></input> 
                             <button className="btn btn-primary" type="submit" style={{
                                 width: '4rem',
                                 marginTop: '2rem'
