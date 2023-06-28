@@ -24,10 +24,11 @@ export default function Menus({ display }){
             method: 'POST',
             body: body,
         })
-        .then((res) => {
+        .then(async (res) => {
             if(res.ok){
-                const { fileUrl } = res.json();
+                const { fileUrl, success } = await res.json();
                 console.log('Uploaded file URL:', fileUrl);
+                console.log('success:', success);
             }
         })
         .catch(err => console.log(err))

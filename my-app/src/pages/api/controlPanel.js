@@ -26,6 +26,8 @@ async function deleteProject(index){
 
         let parsedProjects = JSON.parse(projects).project;
 
+        const imageUrl = parsedProjects[index].img.url;
+
         let deleteProject = parsedProjects.splice(index,1);
         // Burada ilk parametre index i belirtiyor ikincisi ise yapacağı işlemi belirtiyor - silme 
 
@@ -44,9 +46,9 @@ async function deleteProject(index){
             project: jsonList,
         },null,2)
 
-        console.log(newJson)
-
         await fs.writeFile(dataPath + 'projects.json', newJson, 'utf-8');
+
+        await fs.unlink(process.cwd() + `/public/${imageUrl}`)
 
         return true;
     }

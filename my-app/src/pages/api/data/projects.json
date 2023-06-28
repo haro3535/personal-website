@@ -4,9 +4,17 @@
       "header": "Nurten",
       "desc": "Onur",
       "img": {
-        "url": "/foto1.jpg"
+        "url": "/uploads/foto1.jpg"
       },
       "link": ""
+    },
+    {
+      "header": "Harun",
+      "desc": "Onur",
+      "img": {
+        "url": "/uploads/1687986592613-sergey-pesterev-r6FU8zqrgdM-unsplash.jpg"
+      },
+      "link": "asdasd"
     }
   ]
 }
