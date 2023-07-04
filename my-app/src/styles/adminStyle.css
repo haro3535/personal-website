@@ -2,15 +2,22 @@
 .left-menu{
     width: 100%;
     height: auto;
-    border: 1px solid black;
     margin-top: 0.5rem;
+    border-top: 0.5px solid black;
 }
 
 .left-menu-elements{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 0.5rem;
+    height: 3rem;
+    cursor: pointer;
+    border-bottom: 0.5px solid black;
+}
+
+.left-menu-elements:focus{
+    color: white;
+    background-color: dimgrey;
 }
 
 .right-panel{
@@ -124,4 +131,6 @@
     z-index: 11;
     cursor: pointer;
 }
+
+
 

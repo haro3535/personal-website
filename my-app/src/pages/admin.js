@@ -1,35 +1,39 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import useSWR from 'swr';
 import Image from 'next/image'
 import Menus from "./Menus";
+import { parseCookies, destroyCookie } from 'nookies';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function Admin({ admin }){
-    const router = useRouter();
-    const [flag, setFlag] = useState(false);
+export default function Admin(){
     const [search, setSearch] = useState('');
     const [display, setDisplay] = useState(0);
     const [close, setClose] = useState('none')
+    const [rPanelIndex, setRPanelIndex] = useState(0);
     // 0 closes all popups
     // 1 is for the add popup
     // 2 is for the update popup
 
+    const router = useRouter();
+
     useEffect(() => {
-        const parsedInfo = JSON.parse(admin);
-        if (admin != undefined) {
-            if (parsedInfo.isLogged == false) {
-                router.push('http://localhost:3000/login')
-            }
-            else {
-                setFlag(true)
-            }
+
+        const { admin } = parseCookies();
+        if (!admin || admin !== 'true') {
+            router.push('/login');
         }
-    })
+    }, []);
 
     const handleSearch = (e) => {
         setSearch(e.target.value);
+    }
+
+    const handleMenuClick = (e) => {
+        console.log(e.target)
+        // TODO: Make buttons prittier
+        setRPanelIndex(e.target.accessKey)
     }
 
     return(
@@ -38,28 +42,18 @@ export default function Admin({ admin }){
                 <div style={{width: '100vw', height: '100vh',display: 'flex'}}>
                     <div className="left-panel" style={{width: '20vw', height: '100vh', border: '1px solid black'}}>
                         <div className="log-panel">
-                            <div className="iconWrapper logoutIcon"  onClick={() => logout(router)}>
+                            <div className="iconWrapper logoutIcon"  onClick={() => logout()}>
                                 <i className="bi bi-box-arrow-left fs-4"></i>
                             </div>
                         </div>
                         <div className="left-menu">
-                            <div className="left-menu-elements" onClick={() => displayProjects()}>Projects</div>
-                            <div className="left-menu-elements"></div>
-                            <div className="left-menu-elements"></div>
+                            <div className="left-menu-elements" accessKey={0} onClick={handleMenuClick}>Projects</div>
+                            <div className="left-menu-elements" accessKey={1} onClick={handleMenuClick}>Profile</div>
+                            <div className="left-menu-elements" accessKey={2} onClick={handleMenuClick}>Text</div>
                         </div>
                     </div>
                     <div className="right-panel">
-                        <div className="project-info">
-                            <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Proje Adı" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={(value) => handleSearch(value)} />
-                            </div>
-                            <div className="project-list">
-                            <div className="add-row">
-                                <i className="bi bi-plus-circle-dotted fs-3" onClick={() => {setDisplay(1),setClose('flex')}} style={{cursor: 'pointer'}}></i>
-                            </div>
-                                <DisplayProjectsForAdmin search={search} />
-                            </div>
-                        </div>
+                        <RightPanelDisplay index={rPanelIndex} search={search}></RightPanelDisplay>
                     </div>
                 </div>
                 <Menus display={display}></Menus>
@@ -72,6 +66,38 @@ export default function Admin({ admin }){
 }
 
 
+function RightPanelDisplay({ index, search }){
+
+    if(index == 0){
+        return(
+            <div className="project-panel">
+                <div className="input-group mb-3">
+                    <input type="text" className="form-control" placeholder="Proje Adı" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={(value) => handleSearch(value)} />
+                </div>
+                <div className="project-list">
+                    <div className="add-row">
+                        <i className="bi bi-plus-circle-dotted fs-3" onClick={() => {setDisplay(1),setClose('flex')}} style={{cursor: 'pointer'}}></i>
+                    </div>
+                    <DisplayProjectsForAdmin search={search}/>
+                </div>
+            </div>     
+        )
+    }
+    else if(index == 1){
+        return(
+            <div className="profile-panel">
+                Profile
+            </div>
+        )
+    }
+    else if(index == 2){
+        return(
+            <div className="text-panel">
+                text
+            </div>
+        )
+    }
+}
 
 
 function DisplayProjectsForAdmin({ search }){
@@ -160,26 +186,24 @@ function deletePopup(key){
 }
 
 
-function logout(router){
+ async function logout(){
 
-    fetch('/api/logout', {
-        method: 'GET',
-    })
-    .then(res => {
-        if(res.ok) router.push('http://localhost:3000/login')
-        else alert('Hesaptan çıkılamadı!')
-    })
-    .catch(err => console.log(err))
+    try {
+        const response = await fetch('/api/logout', {
+          method: 'POST',
+        });
+  
+        if (response.ok) {
+          // Logout successful, redirect to login page
+          destroyCookie(null,'admin')
+          window.location.href = '/login';
+        } else {
+          console.error('Logout failed');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
 }
 
 
-export const getServerSideProps = async () => {
-    const res = await fetch('http://localhost:3000/api/check');
-    const admin = await res.json();
-  
-    return{
-        props: {
-            admin: admin,
-        },
-    }
-  }
+

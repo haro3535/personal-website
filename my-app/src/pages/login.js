@@ -2,22 +2,24 @@ import { useState, useEffect} from "react";
 import { useRouter } from "next/router";
 import useSWR from 'swr';
 const CryptoJS = require('crypto-js');
+import { parseCookies, destroyCookie } from 'nookies';
 
 
-export default function Login({ admin }){
+
+export default function Login(){
     
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
+
   useEffect(() => {
-    if (admin !== undefined) {
-      const parsedInfo = JSON.parse(admin);
-      if (parsedInfo.isLogged == true) {
-        router.push('http://localhost:3000/admin')
-      }
-    }
-})
+
+        const { admin } = parseCookies();
+        if (admin || admin === 'true') {
+            router.push('/admin');
+        }
+  },[])
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -81,16 +83,3 @@ export default function Login({ admin }){
     </div>
   );
 };
-
-
-
-export const getServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/check');
-  const admin = await res.json();
-
-  return{
-      props: {
-          admin: admin,
-      },
-  }
-}
