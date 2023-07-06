@@ -9,8 +9,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function ProjectsView({ view }){
     return(
-        <main id='projectsView' className="projects" style={{color: view.tcolor}}>
-          <DisplayTexture texture={view.texture} />
+        <main id='projectsView' className="projects" style={{color: view.tcolor, backgroundColor: view.mcolor}}>
           <div className="projectDiv">
             <h1 className="ph1">My Projects</h1>
             <p className="pp">You can see all of my project at below.</p>
@@ -66,10 +65,15 @@ function DisplayProjects(){
         </div>
       )
     }
-
-    return(
-      <div className="projectGalary mb-2">
-        {projects}
-      </div>
-    )
+    
+    if(projects.length == 0){
+      return <p>Couldn't find any project!</p>
+    }
+    else{
+      return(
+        <div className="projectGalary mb-2">
+          {projects}
+        </div>
+      )
+    }
 }

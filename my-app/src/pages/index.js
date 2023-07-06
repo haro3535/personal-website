@@ -62,8 +62,8 @@ export default function Home({ views }) {
             height={500}
             priority={true}
           />
-          <div style={{paddingLeft: "5rem", color: view.tcolor}}>
-            <h3>Harun Onur</h3>
+          <div className='leftdivTextDiv' style={{color: view.tcolor}}>
+            <h3 className='name'>Harun Onur</h3>
             <p>Computer Engineering Student</p>
           </div>
         </div>

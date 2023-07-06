@@ -2,11 +2,13 @@
     "view": [
         {
             "texture": "0",
+            "mcolor": "#F1F6F9",
             "bcolor": "#394867",
             "tcolor": "black"
         },
         {
             "texture": "1",
+            "mcolor": "#394867",
             "bcolor": "#212A3E",
             "tcolor": "white"
         }

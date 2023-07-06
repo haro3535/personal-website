@@ -82,10 +82,39 @@
 html,
 body {
   max-width: 100vw;
+  min-width: 320px;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
+@media (max-width: 700px) {
+  .name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #moon, #sun{
+    margin-top: 1rem;
+  }
+  .socialAccounts{
+    height: auto !important;
+  }
+  .myLink{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 701px) and (max-width: 1120px) {
+  .name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  #moon, #sun{
+    margin-top: 1rem;
+  }
+}
 body::-webkit-scrollbar {
   
 }
