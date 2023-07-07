@@ -9,9 +9,10 @@ import ProjectsView from './projectView'
 import MyAccounts from './socialAccounts'
 import AboutView from './aboutView'
 import Footer from './footer'
-import { createElement, useState } from 'react'
+import { createElement, useEffect, useState } from 'react'
 import Texture1 from './backgroundTexture1';
 import Texture2 from './backgroundTexture2';
+import { useRouter } from 'next/router';
 
 const inter = Inter({ subsets: ['latin'] })
 //Color pattern link https://colorhunt.co/palette/f1f6f9394867212a3e9ba4b5
@@ -39,6 +40,41 @@ export default function Home({ views }) {
     }
   }
 
+  const { locale } = useRouter();
+  const textElements = {
+    profession: "",
+    menu1: "",
+    menu2: "",
+  };
+
+  useEffect(() => {
+
+    const textElementsDefault = {
+      profession: "Computer Engineering Student",
+      menu1: "Projects",
+      menu2: "About Me"
+    }
+
+    if(locale != undefined){
+       switch(locale){
+        case 'tr':
+          const textElementTR = textElementsDefault;
+          textElementTR.menu1 = "Projeler";
+          textElementTR.menu2 = "Hakkımda";
+          textElementTR.profession = "Bilgisayar Mühendisliği Öğrencisi"
+          textElements = textElementTR;
+        case 'de':
+          const textElementDE = textElementsDefault;
+          textElementDE.menu1 = "Projekte";
+          textElementDE.menu2 = "Über Mich";
+          textElementDE.profession = "Student der Informatik"
+          textElements = textElementDE;
+        default:
+          textElements = textElementsDefault;
+       }
+    }
+  })
+
   return (
     <>
       <Head>
@@ -64,7 +100,7 @@ export default function Home({ views }) {
           />
           <div className='leftdivTextDiv' style={{color: view.tcolor}}>
             <h3 className='name'>Harun Onur</h3>
-            <p>Computer Engineering Student</p>
+            <p>{textElements.profession}</p>
           </div>
         </div>
         <div className={`${styles.rightDiv}`}>
@@ -72,12 +108,12 @@ export default function Home({ views }) {
             <div className={`${styles.rightMenuDiv}`}>
               <a href='#projectsView' className='text-reset text-decoration-none'>
                 <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
-                  <h5>Projects</h5>
+                  <h5>{textElements.menu1}</h5>
                 </div>
               </a>
               <a href='#about' className='text-reset text-decoration-none'>
                 <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
-                  <h5>About Me</h5>
+                  <h5>{textElements.menu2}</h5>
                 </div>
               </a>
             </div>

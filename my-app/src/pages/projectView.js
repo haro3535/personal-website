@@ -1,5 +1,6 @@
 import useSWR from 'swr';
 import Image from 'next/image'
+import { useRouter } from 'next/router';
 import { useState } from "react"
 import Texture1 from './backgroundTexture1';
 import Texture2 from './backgroundTexture2';
@@ -8,6 +9,33 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 
 export default function ProjectsView({ view }){
+
+    const { locale } = useRouter();
+
+    switch(locale){
+      case 'tr':
+        return(
+          <main id='projectsView' className="projects" style={{color: view.tcolor, backgroundColor: view.mcolor}}>
+            <TextTR></TextTR>
+            <DisplayProjects />
+          </main>
+        )
+      case 'de':
+        return(
+          <main id='projectsView' className="projects" style={{color: view.tcolor, backgroundColor: view.mcolor}}>
+            <TextDE></TextDE>
+            <DisplayProjects />
+          </main>
+        )
+      default:
+        return(
+          <main id='projectsView' className="projects" style={{color: view.tcolor, backgroundColor: view.mcolor}}>
+            <TextEN></TextEN>
+            <DisplayProjects />
+          </main>
+        )
+    }
+
     return(
         <main id='projectsView' className="projects" style={{color: view.tcolor, backgroundColor: view.mcolor}}>
           <div className="projectDiv">
@@ -23,13 +51,32 @@ export default function ProjectsView({ view }){
     )
 }
 
-function DisplayTexture({ texture }){
+function TextTR(){
+    return(
+      <div className="projectDiv">
+        <h1 className="ph1">Projelerim</h1>
+        <p className="pp">Tüm Projelerime aşağıdan erişebilirsiniz.</p>
+      </div>
+    )
 
-  if (texture == 0) {
-    return <Texture1></Texture1>
-  }
-  
-  return <Texture2></Texture2>
+}
+
+function TextEN(){
+    return(
+      <div className="projectDiv">
+        <h1 className="ph1">My Projects</h1>
+        <p className="pp">You can see all of my projects below.</p>
+      </div>
+    )
+}
+
+function TextDE(){
+    return(
+      <div className="projectDiv">
+        <h1 className="ph1">Meine Projekte</h1>
+        <p className="pp">Unten können Sie alle meine Projekte sehen.</p>
+      </div>
+    )
 }
 
 function DisplayProjects(){
