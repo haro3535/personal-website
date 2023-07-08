@@ -53,7 +53,7 @@ export default function Admin(){
                         </div>
                     </div>
                     <div className="right-panel">
-                        <RightPanelDisplay index={rPanelIndex} search={search}></RightPanelDisplay>
+                        <RightPanelDisplay index={rPanelIndex} search={search} setDisplay={setDisplay} setClose={setClose}></RightPanelDisplay>
                     </div>
                 </div>
                 <Menus display={display}></Menus>
@@ -66,7 +66,7 @@ export default function Admin(){
 }
 
 
-function RightPanelDisplay({ index, search }){
+function RightPanelDisplay({ index, search, setDisplay, setClose }){
 
     if(index == 0){
         return(

@@ -87,6 +87,10 @@ body {
   scroll-behavior: smooth;
 }
 
+.leftdivTextDiv p, .leftdivTextDiv h3 {
+  margin-left: 5rem;
+}
+
 @media (max-width: 700px) {
   .name{
     display: flex;
@@ -103,6 +107,9 @@ body {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
+  .leftdivTextDiv p, .leftdivTextDiv h3 {
+    margin-left: 0rem;
+  }
 }
 
 @media (min-width: 701px) and (max-width: 1120px) {
@@ -113,6 +120,9 @@ body {
   }
   #moon, #sun{
     margin-top: 1rem;
+  }
+  .leftdivTextDiv p, .leftdivTextDiv h3 {
+    margin-left: 0rem;
   }
 }
 body::-webkit-scrollbar {

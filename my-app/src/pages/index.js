@@ -47,34 +47,6 @@ export default function Home({ views }) {
     menu2: "",
   };
 
-  useEffect(() => {
-
-    const textElementsDefault = {
-      profession: "Computer Engineering Student",
-      menu1: "Projects",
-      menu2: "About Me"
-    }
-
-    if(locale != undefined){
-       switch(locale){
-        case 'tr':
-          const textElementTR = textElementsDefault;
-          textElementTR.menu1 = "Projeler";
-          textElementTR.menu2 = "Hakkımda";
-          textElementTR.profession = "Bilgisayar Mühendisliği Öğrencisi"
-          textElements = textElementTR;
-        case 'de':
-          const textElementDE = textElementsDefault;
-          textElementDE.menu1 = "Projekte";
-          textElementDE.menu2 = "Über Mich";
-          textElementDE.profession = "Student der Informatik"
-          textElements = textElementDE;
-        default:
-          textElements = textElementsDefault;
-       }
-    }
-  })
-
   return (
     <>
       <Head>
@@ -100,23 +72,12 @@ export default function Home({ views }) {
           />
           <div className='leftdivTextDiv' style={{color: view.tcolor}}>
             <h3 className='name'>Harun Onur</h3>
-            <p>{textElements.profession}</p>
+            <PrintProfession locale={locale}/>
           </div>
         </div>
         <div className={`${styles.rightDiv}`}>
           <div className={`${styles.rightMenu}`} style={{color: view.tcolor}}>
-            <div className={`${styles.rightMenuDiv}`}>
-              <a href='#projectsView' className='text-reset text-decoration-none'>
-                <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
-                  <h5>{textElements.menu1}</h5>
-                </div>
-              </a>
-              <a href='#about' className='text-reset text-decoration-none'>
-                <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
-                  <h5>{textElements.menu2}</h5>
-                </div>
-              </a>
-            </div>
+            <PrintMenu locale={locale} view={view}></PrintMenu>
           </div>
         </div>
       </main>
@@ -153,6 +114,74 @@ function DisplayTexture({ texture }){
   
   return <Texture2></Texture2>
 }
+
+function PrintProfession({ locale }){
+
+  if(locale == 'tr'){
+    return <p>Bilgisayar Mühendisliği Öğrencisi</p>
+  }
+  else if(locale == 'de'){
+    return <p>Student der Informatik</p>
+  }
+  else{
+    return <p>Computer Engineering Student</p>
+  }
+
+}
+
+function PrintMenu({ locale, view }){
+
+  if(locale == 'tr'){
+    return(
+      <div className={`${styles.rightMenuDiv}`}>
+        <a href='#projectsView' className='text-reset text-decoration-none'>
+          <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
+            <h5>Projeler</h5>
+          </div>
+        </a>
+        <a href='#about' className='text-reset text-decoration-none'>
+          <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
+            <h5>Hakkımda</h5>
+          </div>
+        </a>
+      </div>
+    )
+  }
+  else if(locale == 'de'){
+    return(
+      <div className={`${styles.rightMenuDiv}`}>
+      <a href='#projectsView' className='text-reset text-decoration-none'>
+        <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
+          <h5>Projecte</h5>
+        </div>
+      </a>
+      <a href='#about' className='text-reset text-decoration-none'>
+        <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
+          <h5>Über Mich</h5>
+        </div>
+      </a>
+    </div>
+    )
+  }
+  else{
+    return(
+      <div className={`${styles.rightMenuDiv}`}>
+      <a href='#projectsView' className='text-reset text-decoration-none'>
+        <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
+          <h5>Projects</h5>
+        </div>
+      </a>
+      <a href='#about' className='text-reset text-decoration-none'>
+        <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
+          <h5>About Me</h5>
+        </div>
+      </a>
+    </div>
+    )
+  }
+}
+
+
 
 
 /*function getView(){

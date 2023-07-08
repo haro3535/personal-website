@@ -45,9 +45,6 @@
   z-index: 2;
 }
 
-.leftdivTextDiv{
-  padding-left: 5rem;
-}
 
 .rightDiv{
   height: 100vh;
@@ -106,7 +103,8 @@
 
 .rightMenuDivElements:hover{
   background-color: #394867;
-  color: white;
+  color: white !important;
+  border: 1px solid white !important;
   transition: ease-in-out 0.25s;
 }
 
@@ -135,6 +133,7 @@
 @media (hover: hover) and (pointer: fine) {
   
 }
+
 
 @media (prefers-reduced-motion) {
   
