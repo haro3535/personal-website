@@ -64,8 +64,10 @@ export default function Menus({ display }){
     else if (display == 2){
         return(
             <>
-                <div className="popups" id="update-popup">
+                <div className="popups-wrapper">
+                    <div className="popups" id="update-popup">
     
+                    </div>
                 </div>
             </>
         )

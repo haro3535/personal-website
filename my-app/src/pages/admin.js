@@ -8,7 +8,6 @@ import { parseCookies, destroyCookie } from 'nookies';
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Admin(){
-    const [search, setSearch] = useState('');
     const [display, setDisplay] = useState(0);
     const [close, setClose] = useState('none')
     const [rPanelIndex, setRPanelIndex] = useState(0);
@@ -25,10 +24,6 @@ export default function Admin(){
             router.push('/login');
         }
     }, []);
-
-    const handleSearch = (e) => {
-        setSearch(e.target.value);
-    }
 
     const handleMenuClick = (e) => {
         console.log(e.target)
@@ -53,7 +48,7 @@ export default function Admin(){
                         </div>
                     </div>
                     <div className="right-panel">
-                        <RightPanelDisplay index={rPanelIndex} search={search} setDisplay={setDisplay} setClose={setClose}></RightPanelDisplay>
+                        <RightPanelDisplay index={rPanelIndex} setDisplay={setDisplay} setClose={setClose}></RightPanelDisplay>
                     </div>
                 </div>
                 <Menus display={display}></Menus>
@@ -66,19 +61,25 @@ export default function Admin(){
 }
 
 
-function RightPanelDisplay({ index, search, setDisplay, setClose }){
+function RightPanelDisplay({ index, setDisplay, setClose }){
+
+    const [search, setSearch] = useState('');
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
+    }
 
     if(index == 0){
         return(
             <div className="project-panel">
                 <div className="input-group mb-3">
-                    <input type="text" className="form-control" placeholder="Proje Adı" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={(value) => handleSearch(value)} />
+                    <input type="text" className="form-control" placeholder="Proje Adı" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={handleSearch} />
                 </div>
                 <div className="project-list">
                     <div className="add-row">
                         <i className="bi bi-plus-circle-dotted fs-3" onClick={() => {setDisplay(1),setClose('flex')}} style={{cursor: 'pointer'}}></i>
                     </div>
-                    <DisplayProjectsForAdmin search={search}/>
+                    <DisplayProjectsForAdmin search={search} setDisplay={setDisplay} close={setClose}/>
                 </div>
             </div>     
         )
@@ -100,7 +101,7 @@ function RightPanelDisplay({ index, search, setDisplay, setClose }){
 }
 
 
-function DisplayProjectsForAdmin({ search }){
+function DisplayProjectsForAdmin({ search, setDisplay, close }){
 
     const {data , error, isLoading} = useSWR('/api/project', fetcher);
     const projectElements = [];
@@ -135,7 +136,7 @@ function DisplayProjectsForAdmin({ search }){
                     <div className="iconWrapper trashIcons" onClick={() => deletePopup(index)}>
                         <i className="bi bi-trash fs-5"></i>
                     </div>
-                    <div className="iconWrapper pencilIcons" onClick={() => console.log('clicked')}>
+                    <div className="iconWrapper pencilIcons" onClick={() => {setDisplay(2),close("flex")}}>
                         <i className="bi bi-pencil fs-5"></i>
                     </div>
                   </div>
@@ -153,9 +154,9 @@ function DisplayProjectsForAdmin({ search }){
     }
     else {
         projectElements.forEach( project => {
-            const headerVal = project.props.children[1].props.children[0].props.children
+            const headerVal = project.props.children[1].props.children[0].props.children.toLowerCase();
     
-            if (headerVal.includes(search)){
+            if (headerVal.includes(search.toLowerCase())){
                 displayedProject.push(project);
             }
         })
