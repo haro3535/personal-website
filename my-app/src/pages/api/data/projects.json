@@ -1,20 +1,36 @@
 {
   "project": [
     {
-      "header": "Nurten",
-      "desc": "Onur",
+      "headers": {
+        "tr": "Harun'un Projesi",
+        "en": "Harun's Project",
+        "de": "Haruns Projekt"
+      },
+      "descriptions": {
+        "tr": "Harun'un Proje Açıklaması",
+        "en": "Harun's Project Description",
+        "de": "Haruns Projektbeschreibung"
+      },
       "img": {
-        "url": "/uploads/foto1.jpg"
+        "url": "/uploads/1687986592613-sergey-pesterev-r6FU8zqrgdM-unsplash.jpg"
       },
       "link": ""
     },
     {
-      "header": "Harun",
-      "desc": "Onur",
-      "img": {
-        "url": "/uploads/1687986592613-sergey-pesterev-r6FU8zqrgdM-unsplash.jpg"
+      "headers": {
+        "tr": "Bir",
+        "en": "One",
+        "de": "Eins"
       },
-      "link": "asdasd"
+      "descriptions": {
+        "tr": "Ben",
+        "en": "I",
+        "de": "Ich"
+      },
+      "img": {
+        "url": "/uploads/1688992105757-annie-spratt-pbrQvuKJQf8-unsplash.jpg"
+      },
+      "link": "link"
     }
   ]
 }

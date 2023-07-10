@@ -5,18 +5,17 @@ export default function Menus({ display }){
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(e.target[0].value)
-        console.log(e.target[1].value)
-        console.log(e.target[2].value)
-        console.log(e.target[3].value)
-
-        const image = e.target[2].files[0]
+        const image = e.target["Image"].files[0]
         const body = new FormData();
 
-        body.append('header',e.target[0].value)
-        body.append('description',e.target[1].value)
+        body.append('headers',e.target["HTr"].value)
+        body.append('headers',e.target["HEn"].value)
+        body.append('headers',e.target["HDe"].value)
+        body.append('descriptions',e.target["DTr"].value)
+        body.append('descriptions',e.target["DEn"].value)
+        body.append('descriptions',e.target["DDe"].value)
         body.append('image',image);
-        body.append('link',e.target[3].value)
+        body.append('link',e.target["Link"].value)
 
         console.log(body)
 
@@ -44,10 +43,14 @@ export default function Menus({ display }){
                 <div className="popups-wrapper">
                     <div className="popups" id="add-popup">
                         <form onSubmit={handleSubmit} encType="multiple/form-data">
-                            <input type="text" placeholder="Başlık" style={{marginTop: '2rem'}} required></input>
-                            <textarea placeholder="Açıklama" style={{resize: 'none', marginTop: '2rem', height: '5rem'}} required></textarea>
-                            <input type="file" accept="image/*" style={{marginTop: '2rem'}} required></input>
-                            <input type="text" placeholder="Link" style={{marginTop: '2rem'}} required></input> 
+                            <input type="text" name="HTr" placeholder="Başlık Türkçe" style={{marginTop: '2rem'}} required></input>
+                            <input type="text" name="HEn" placeholder="Başlık İngilizce" style={{marginTop: '2rem'}} required></input>
+                            <input type="text" name="HDe" placeholder="Başlık Almanca" style={{marginTop: '2rem'}} required></input>
+                            <textarea name="DTr" placeholder="Açıklama Türkçe" style={{resize: 'none', marginTop: '2rem', height: '5rem'}} required></textarea>
+                            <textarea name="DEn" placeholder="Açıklama İngilizce" style={{resize: 'none', marginTop: '2rem', height: '5rem'}} required></textarea>
+                            <textarea name="DDe" placeholder="Açıklama Almanca" style={{resize: 'none', marginTop: '2rem', height: '5rem'}} required></textarea>
+                            <input type="file" name="Image" accept="image/*" style={{marginTop: '2rem'}} required></input>
+                            <input type="text" name="Link" placeholder="Link" style={{marginTop: '2rem'}} required></input> 
                             <button className="btn btn-primary" type="submit" style={{
                                 width: '4rem',
                                 marginTop: '2rem'

@@ -1,6 +1,7 @@
 import { IncomingForm } from "formidable";
 import path from "path";
 import fs from "fs-extra";
+import { headers } from "next/dist/client/components/headers";
 
 
 export const config = {
@@ -55,7 +56,8 @@ async function createProject(fields, filepath){
 
   try{
 
-    const { header, description, link } = fields;
+    const { headers, descriptions, link } = fields;
+    console.log(fields);
 
     const dataPath = path.join(process.cwd(), 'src/pages/api/data/');
     const projects = await fs.readFile(dataPath + 'projects.json', 'utf-8');
@@ -63,8 +65,16 @@ async function createProject(fields, filepath){
     let parsedProjects = JSON.parse(projects).project;
 
     const project = {
-      header: header[0],
-      desc: description[0],
+      headers: {
+        tr: headers[0],
+        en: headers[1],
+        de: headers[2]
+      },
+      descriptions: {
+        tr: descriptions[0],
+        en: descriptions[1],
+        de: descriptions[2],
+      },
       img: {
         url: filepath,
       },

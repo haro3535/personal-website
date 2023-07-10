@@ -109,14 +109,17 @@
     padding-right: 1rem;
     padding-left: 2rem;
     padding-top: 0.5rem;
+    overflow-y: scroll;
 }
 
 .popups form {
     position: relative;
     width: 50vw;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    padding-bottom: 1rem;
 }
 
 .close-wrapper{

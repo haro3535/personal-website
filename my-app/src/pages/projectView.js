@@ -35,20 +35,6 @@ export default function ProjectsView({ view }){
           </main>
         )
     }
-
-    return(
-        <main id='projectsView' className="projects" style={{color: view.tcolor, backgroundColor: view.mcolor}}>
-          <div className="projectDiv">
-            <h1 className="ph1">My Projects</h1>
-            <p className="pp">You can see all of my project at below.</p>
-          {
-          // Not need this button right now
-          //<button type="button" className="pbutton btn btn-outline-primary btn-sm ">See All</button>
-          }
-          </div>
-          <DisplayProjects />
-      </main>
-    )
 }
 
 function TextTR(){
@@ -83,6 +69,14 @@ function DisplayProjects(){
 
   const { data, error, isLoading } = useSWR('/api/project', fetcher);
 
+  const { locale } = useRouter();
+  const [lang, setLang] = useState("tr");
+
+  switch(locale){
+    case "tr":
+
+  }
+
   if (error) return <div>Failed to load</div>;
 
   if (isLoading) return <div>Loading...</div>;
@@ -106,8 +100,8 @@ function DisplayProjects(){
               />
             </div>
             <div className='container' style={{backgroundColor: '#F1F6F9', color: "black"}}>
-              <h3>{parsedData.project[index].header}</h3>
-              <p>{parsedData.project[index].desc}</p>
+              <h3>{parsedData.project[index].headers[locale]}</h3>
+              <p>{parsedData.project[index].descriptions[locale]}</p>
             </div>
         </div>
       )
@@ -119,7 +113,7 @@ function DisplayProjects(){
     else{
       return(
         <div className="projectGalary mb-2">
-          {projects}
+          {projects.reverse()}
         </div>
       )
     }

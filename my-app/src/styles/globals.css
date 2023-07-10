@@ -86,9 +86,12 @@ body {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
-
-.leftdivTextDiv p, .leftdivTextDiv h3 {
-  margin-left: 5rem;
+.leftdivTextDiv{
+  padding-left: 0rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 700px) {
@@ -107,9 +110,6 @@ body {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
   }
-  .leftdivTextDiv p, .leftdivTextDiv h3 {
-    margin-left: 0rem;
-  }
 }
 
 @media (min-width: 701px) and (max-width: 1120px) {
@@ -120,9 +120,6 @@ body {
   }
   #moon, #sun{
     margin-top: 1rem;
-  }
-  .leftdivTextDiv p, .leftdivTextDiv h3 {
-    margin-left: 0rem;
   }
 }
 body::-webkit-scrollbar {

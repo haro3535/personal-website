@@ -106,6 +106,8 @@ function DisplayProjectsForAdmin({ search }){
     const projectElements = [];
     const displayedProject = [];
 
+    const { locale } = useRouter();
+
     if (error) console.log(error);
     if (isLoading) console.log('Loading...')
     
@@ -126,8 +128,8 @@ function DisplayProjectsForAdmin({ search }){
                     />
                   </div>
                   <div className='container' style={{backgroundColor: '#F1F6F9', color: "black"}}>
-                    <h3>{parsedData.project[index].header}</h3>
-                    <p>{parsedData.project[index].desc}</p>
+                    <h3>{parsedData.project[index].headers[locale]}</h3>
+                    <p>{parsedData.project[index].descriptions[locale]}</p>
                   </div>
                   <div className="edit-buttons">
                     <div className="iconWrapper trashIcons" onClick={() => deletePopup(index)}>

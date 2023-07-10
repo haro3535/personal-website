@@ -8,7 +8,6 @@ export default function AboutView({ view }){
 
     const router = useRouter();
     const { locale } = router;
-    console.log(locale)
 
     const [displayWhite , setDisplayWhite] = useState('flex');
     const [displayBlue , setDisplayBlue] = useState('none');

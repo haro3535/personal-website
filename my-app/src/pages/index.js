@@ -41,11 +41,6 @@ export default function Home({ views }) {
   }
 
   const { locale } = useRouter();
-  const textElements = {
-    profession: "",
-    menu1: "",
-    menu2: "",
-  };
 
   return (
     <>
@@ -96,8 +91,6 @@ export async function getStaticProps(){
 
   const res = await fetch('http://localhost:3000/api/view');
   const views = await res.json();
-
-  console.log(JSON.parse(views))
 
   return{
     props:{

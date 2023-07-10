@@ -124,6 +124,12 @@
   color: black;
 }
 
+.leftdivTextDiv{
+  padding-left: 0rem;
+  justify-content: center;
+  align-items: center;
+}
+
 
 
 
@@ -149,11 +155,6 @@
     height: auto;
     width: 100%;
     padding-top: 4rem;
-  }
-  .leftdivTextDiv{
-    padding-left: 0rem;
-    justify-content: center;
-    align-items: center;
   }
   .rightDiv{
     height: auto;
