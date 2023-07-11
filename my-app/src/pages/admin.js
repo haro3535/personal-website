@@ -10,6 +10,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function Admin(){
     const [display, setDisplay] = useState(0);
     const [close, setClose] = useState('none')
+    const [projectIndex, setProjectIndex] = useState();
     const [rPanelIndex, setRPanelIndex] = useState(0);
     // 0 closes all popups
     // 1 is for the add popup
@@ -48,10 +49,10 @@ export default function Admin(){
                         </div>
                     </div>
                     <div className="right-panel">
-                        <RightPanelDisplay index={rPanelIndex} setDisplay={setDisplay} setClose={setClose}></RightPanelDisplay>
+                        <RightPanelDisplay index={rPanelIndex} setDisplay={setDisplay} setClose={setClose} setProjectIndex={setProjectIndex}></RightPanelDisplay>
                     </div>
                 </div>
-                <Menus display={display}></Menus>
+                <Menus display={display} projectIndex={projectIndex}></Menus>
                     <div className="close-wrapper" style={{display: close}}>
                         <i className="bi bi-x-lg fs-3 closeIcon" onClick={() => {setDisplay(0),setClose('none')}}></i>
                     </div>
@@ -61,7 +62,7 @@ export default function Admin(){
 }
 
 
-function RightPanelDisplay({ index, setDisplay, setClose }){
+function RightPanelDisplay({ index, setDisplay, setClose, setProjectIndex }){
 
     const [search, setSearch] = useState('');
 
@@ -79,7 +80,7 @@ function RightPanelDisplay({ index, setDisplay, setClose }){
                     <div className="add-row">
                         <i className="bi bi-plus-circle-dotted fs-3" onClick={() => {setDisplay(1),setClose('flex')}} style={{cursor: 'pointer'}}></i>
                     </div>
-                    <DisplayProjectsForAdmin search={search} setDisplay={setDisplay} close={setClose}/>
+                    <DisplayProjectsForAdmin search={search} setDisplay={setDisplay} close={setClose} setProjectIndex={setProjectIndex}/>
                 </div>
             </div>     
         )
@@ -101,7 +102,7 @@ function RightPanelDisplay({ index, setDisplay, setClose }){
 }
 
 
-function DisplayProjectsForAdmin({ search, setDisplay, close }){
+function DisplayProjectsForAdmin({ search, setDisplay, close, setProjectIndex }){
 
     const {data , error, isLoading} = useSWR('/api/project', fetcher);
     const projectElements = [];
@@ -136,7 +137,7 @@ function DisplayProjectsForAdmin({ search, setDisplay, close }){
                     <div className="iconWrapper trashIcons" onClick={() => deletePopup(index)}>
                         <i className="bi bi-trash fs-5"></i>
                     </div>
-                    <div className="iconWrapper pencilIcons" onClick={() => {setDisplay(2),close("flex")}}>
+                    <div className="iconWrapper pencilIcons" onClick={() => {setDisplay(2),close("flex"),setProjectIndex(index)}}>
                         <i className="bi bi-pencil fs-5"></i>
                     </div>
                   </div>

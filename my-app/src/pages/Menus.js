@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
+import useSWR from "swr";
 
-export default function Menus({ display }){
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
+export default function Menus({ display, projectIndex }){
+
+    const {data , error, isLoading} = useSWR('/api/project', fetcher);
+
+    if(error) alert('Projeleri yüklerken bir hata gerçekleşti!');
+    if(isLoading) return <p>Loading...</p>
+
+    const parsedData = JSON.parse(data);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,6 +44,58 @@ export default function Menus({ display }){
 
     }
 
+    const handleUpdateSubmit = (e) => {
+        e.preventDefault();
+        console.log(e.target)
+
+        const currentProject = parsedData.project[projectIndex];
+        let projectDataValues = [
+            currentProject.headers['tr'],
+            currentProject.headers['en'],
+            currentProject.headers['de'],
+            currentProject.descriptions['tr'],
+            currentProject.descriptions['en'],
+            currentProject.descriptions['de'],
+            currentProject.img['url'],
+            currentProject.link
+        ]
+
+        let isChanged = false;
+        let newImage = false;
+
+        const myForm = e.target;
+        for(var i=0; i> (myForm.childElementCount-1); i++){
+            if(i = 6){
+                if(myForm.children[i].files[0] == (null || undefined || '')){
+                    continue;
+                }
+                else{
+                    newImage = true; 
+                }
+            }
+            if(myForm.children[i].value != projectDataValues[i]){
+                isChanged = true;
+            }
+        }
+
+        if(!isChanged && !newImage) alert('Değişiklik algılanamadı!')
+
+        const image = myForm['Image'].files[0];
+        const body = new FormData();
+
+        body.append('headers',myForm["HTr"].value)
+        body.append('headers',myForm["HEn"].value)
+        body.append('headers',myForm["HDe"].value)
+        body.append('descriptions',myForm["DTr"].value)
+        body.append('descriptions',myForm["DEn"].value)
+        body.append('descriptions',myForm["DDe"].value)
+        body.append('image',image);
+        body.append('link',myForm["Link"].value)
+
+        // datayı fetch lemek kaldı 
+
+    }
+
     if (display == 0) {
         return;
     }
@@ -61,12 +123,25 @@ export default function Menus({ display }){
             </>
         )
     }
-    else if (display == 2){
+    else if (display == 2 && (projectIndex != undefined || projectIndex != null)){
         return(
             <>
                 <div className="popups-wrapper">
                     <div className="popups" id="update-popup">
-    
+                        <form onSubmit={handleUpdateSubmit} encType="multiple/form-data">
+                            <input type="text" name="HTr" placeholder="Başlık Türkçe" defaultValue={parsedData.project[projectIndex].headers['tr']} style={{marginTop: '2rem'}} required></input>
+                            <input type="text" name="HEn" placeholder="Başlık İngilizce" defaultValue={parsedData.project[projectIndex].headers['en']} style={{marginTop: '2rem'}} required></input>
+                            <input type="text" name="HDe" placeholder="Başlık Almanca" defaultValue={parsedData.project[projectIndex].headers['de']} style={{marginTop: '2rem'}} required></input>
+                            <textarea name="DTr" placeholder="Açıklama Türkçe" defaultValue={parsedData.project[projectIndex].descriptions['tr']} style={{resize: 'none', marginTop: '2rem', height: '5rem'}} required></textarea>
+                            <textarea name="DEn" placeholder="Açıklama İngilizce" defaultValue={parsedData.project[projectIndex].descriptions['en']} style={{resize: 'none', marginTop: '2rem', height: '5rem'}} required></textarea>
+                            <textarea name="DDe" placeholder="Açıklama Almanca" defaultValue={parsedData.project[projectIndex].descriptions['de']} style={{resize: 'none', marginTop: '2rem', height: '5rem'}} required></textarea>
+                            <input type="file" name="Image" accept="image/*" style={{marginTop: '2rem'}}></input>
+                            <input type="text" name="Link" placeholder="Link" defaultValue={parsedData.project[projectIndex].link} style={{marginTop: '2rem'}} required></input> 
+                            <button className="btn btn-primary" type="submit" style={{
+                                width: '10rem',
+                                marginTop: '2rem'
+                            }}>Değişikliği Kaydet</button>
+                        </form>
                     </div>
                 </div>
             </>
