@@ -60,20 +60,29 @@ export default function Menus({ display, projectIndex }){
             currentProject.link
         ]
 
+        console.log(projectDataValues)
+
         let isChanged = false;
         let newImage = false;
 
         const myForm = e.target;
-        for(var i=0; i> (myForm.childElementCount-1); i++){
-            if(i = 6){
-                if(myForm.children[i].files[0] == (null || undefined || '')){
-                    continue;
+        console.log(myForm.childElementCount)
+        for(let i = 0; i < (myForm.childElementCount-1); i++){
+            if(i == 6){
+                try{
+                    if(myForm.children[i].files[0] == (null || undefined || '')){
+                        continue;
+                    }
+                    else{
+                        newImage = true; 
+                    }
                 }
-                else{
-                    newImage = true; 
+                catch(err){
+                    console.log(err)
                 }
             }
             if(myForm.children[i].value != projectDataValues[i]){
+                console.log('merhaba')
                 isChanged = true;
             }
         }
@@ -91,8 +100,20 @@ export default function Menus({ display, projectIndex }){
         body.append('descriptions',myForm["DDe"].value)
         body.append('image',image);
         body.append('link',myForm["Link"].value)
+        body.append('index',projectIndex)
 
         // datayı fetch lemek kaldı 
+
+        fetch('/api/update', {
+            method: "POST",
+            body: body,
+        })
+        .then(res => {
+            if(res.ok){
+
+            }
+        })
+        .catch(err => console.error(err))
 
     }
 
