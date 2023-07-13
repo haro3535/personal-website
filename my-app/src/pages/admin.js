@@ -76,11 +76,13 @@ function RightPanelDisplay({ index, setDisplay, setClose, setProjectIndex }){
                 <div className="input-group mb-3">
                     <input type="text" className="form-control" placeholder="Proje Adı" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={handleSearch} />
                 </div>
-                <div className="project-list">
+                <div className="project-list-wrapper">
                     <div className="add-row">
                         <i className="bi bi-plus-circle-dotted fs-3" onClick={() => {setDisplay(1),setClose('flex')}} style={{cursor: 'pointer'}}></i>
                     </div>
-                    <DisplayProjectsForAdmin search={search} setDisplay={setDisplay} close={setClose} setProjectIndex={setProjectIndex}/>
+                    <div className="project-list">
+                        <DisplayProjectsForAdmin search={search} setDisplay={setDisplay} close={setClose} setProjectIndex={setProjectIndex}/>
+                    </div>
                 </div>
             </div>     
         )
@@ -118,30 +120,32 @@ function DisplayProjectsForAdmin({ search, setDisplay, close, setProjectIndex })
 
         for (let index = 0; index < parsedData.project.length; index++) {
             projectElements.push(
-              <div key={index} className='pElements'>
-                  <div className='elementPhoto'>
-                    <Image
-                      src={parsedData.project[index].img.url}
-                      alt='1'
-                      className='elementPhotoImage'
-                      width={500}
-                      height={500}
-                      priority={true}
-                    />
-                  </div>
-                  <div className='container' style={{backgroundColor: '#F1F6F9', color: "black"}}>
-                    <h3>{parsedData.project[index].headers[locale]}</h3>
-                    <p>{parsedData.project[index].descriptions[locale]}</p>
-                  </div>
-                  <div className="edit-buttons">
-                    <div className="iconWrapper trashIcons" onClick={() => deletePopup(index)}>
-                        <i className="bi bi-trash fs-5"></i>
+                <div key={index} className='pElements'>
+                    <a href={parsedData.project[index].link} className="pElementsLink" target='_blank'>
+                        <div className='elementPhoto'>
+                            <Image
+                                src={parsedData.project[index].img.url}
+                                alt='1'
+                                className='elementPhotoImage'
+                                width={500}
+                                height={500}
+                                priority={true}
+                            />
+                        </div>
+                        <div className='container' style={{backgroundColor: '#F1F6F9', color: "black"}}>
+                            <h3>{parsedData.project[index].headers[locale]}</h3>
+                            <p>{parsedData.project[index].descriptions[locale]}</p>
+                        </div>
+                    </a>
+                    <div className="edit-buttons">
+                        <div className="iconWrapper trashIcons" onClick={() => deletePopup(index)}>
+                            <i className="bi bi-trash fs-5"></i>
+                        </div>
+                        <div className="iconWrapper pencilIcons" onClick={() => {setDisplay(2),close("flex"),setProjectIndex(index)}}>
+                            <i className="bi bi-pencil fs-5"></i>
+                        </div>
                     </div>
-                    <div className="iconWrapper pencilIcons" onClick={() => {setDisplay(2),close("flex"),setProjectIndex(index)}}>
-                        <i className="bi bi-pencil fs-5"></i>
-                    </div>
-                  </div>
-              </div>
+                </div>
             )
           }
     }
@@ -155,7 +159,7 @@ function DisplayProjectsForAdmin({ search, setDisplay, close, setProjectIndex })
     }
     else {
         projectElements.forEach( project => {
-            const headerVal = project.props.children[1].props.children[0].props.children.toLowerCase();
+            const headerVal = project.props.children[0].props.children[1].props.children[0].props.children.toLowerCase();
     
             if (headerVal.includes(search.toLowerCase())){
                 displayedProject.push(project);

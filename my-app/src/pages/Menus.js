@@ -38,9 +38,10 @@ export default function Menus({ display, projectIndex }){
                 const { fileUrl, success } = await res.json();
                 console.log('Uploaded file URL:', fileUrl);
                 console.log('success:', success);
+                alert("Proje Eklendi!");
             }
         })
-        .catch(err => console.log(err))
+        .catch(err => alert("Proje Eklenemedi!"))
 
     }
 
@@ -108,12 +109,17 @@ export default function Menus({ display, projectIndex }){
             method: "POST",
             body: body,
         })
-        .then(res => {
+        .then(async res => {
             if(res.ok){
+                const { success } = await res.json();
+                if (success) {
+                    alert('Proje Güncellendi!')
+                }
+                else alert('Proje Güncellenemedi!')
 
             }
         })
-        .catch(err => console.error(err))
+        .catch(err => alert("Bir hata meydana geldi!"))
 
     }
 

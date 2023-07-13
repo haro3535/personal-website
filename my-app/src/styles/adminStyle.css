@@ -29,11 +29,23 @@
     background-color: gainsboro;
 }
 
-.project-list{
+.project-list-wrapper{
     width: auto;
     height: 70vh;
     border: 1px solid black;
     margin-top: 3rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-list{
+    width: 100%;
+    overflow: auto;
+}
+
+.project-list p {
+    margin-bottom: 0 !important;
 }
 
 .edit-buttons{
@@ -136,4 +148,18 @@
 }
 
 
+@media (max-width: 720px) {
+    .edit-buttons{
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+      }
+    .project-list{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
 

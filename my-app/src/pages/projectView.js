@@ -88,7 +88,7 @@ function DisplayProjects(){
     const projects = []
     for (let index = 0; index < parsedData.project.length; index++) {
       projects.push(
-        <div key={index} className='pElements'>
+        <a key={index} className='pElements' href={parsedData.project[index].link} target='_blank' style={{textDecoration: 'none'}}>
             <div className='elementPhoto'>
               <Image
                 src={parsedData.project[index].img.url}
@@ -103,7 +103,7 @@ function DisplayProjects(){
               <h3>{parsedData.project[index].headers[locale]}</h3>
               <p>{parsedData.project[index].descriptions[locale]}</p>
             </div>
-        </div>
+        </a>
       )
     }
     

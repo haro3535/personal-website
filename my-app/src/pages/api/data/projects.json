@@ -15,6 +15,22 @@
         "url": "/uploads/1687986592613-sergey-pesterev-r6FU8zqrgdM-unsplash.jpg"
       },
       "link": "a"
+    },
+    {
+      "headers": {
+        "tr": "Bir",
+        "en": "One",
+        "de": "Eins"
+      },
+      "descriptions": {
+        "tr": "Ben",
+        "en": "I",
+        "de": "Ich"
+      },
+      "img": {
+        "url": "/uploads/1689247845582-kellen-riggin-eNYShPfzkyQ-unsplash.jpg"
+      },
+      "link": "https://www.google.com.tr"
     }
   ]
 }
