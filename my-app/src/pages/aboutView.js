@@ -55,16 +55,6 @@ export default function AboutView({ view }){
                     </>
                 )
     }
-
-    return(
-        <>
-            <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: view.mcolor, color: view.tcolor}}>
-                <div className="container h-auto vw-70" style={{zIndex: '2'}}>
-                    
-                </div>
-            </main>
-        </>
-    )
 };
 
 

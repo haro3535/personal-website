@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import Image from 'next/image'
 import Menus from "./Menus";
 import { parseCookies, destroyCookie } from 'nookies';
+import AdminProfile from "./adminProfile";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -90,7 +91,7 @@ function RightPanelDisplay({ index, setDisplay, setClose, setProjectIndex }){
     else if(index == 1){
         return(
             <div className="profile-panel">
-                Profile
+                <AdminProfile></AdminProfile>
             </div>
         )
     }

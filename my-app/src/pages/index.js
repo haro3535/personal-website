@@ -145,7 +145,7 @@ function PrintMenu({ locale, view }){
       <div className={`${styles.rightMenuDiv}`}>
       <a href='#projectsView' className='text-reset text-decoration-none'>
         <div className={`${styles.rightMenuDivElements}`} style={{color: view.tcolor}}>
-          <h5>Projecte</h5>
+          <h5>Projekte</h5>
         </div>
       </a>
       <a href='#about' className='text-reset text-decoration-none'>
