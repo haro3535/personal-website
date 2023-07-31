@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import Image from 'next/image'
 import { useRouter } from 'next/router';
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Texture1 from './backgroundTexture1';
 import Texture2 from './backgroundTexture2';
 
@@ -69,13 +69,14 @@ function DisplayProjects(){
 
   const { data, error, isLoading } = useSWR('/api/project', fetcher);
 
-  const { locale } = useRouter();
-  const [lang, setLang] = useState("tr");
+  const router = useRouter();
+  const currentLocale = router.asPath.split('/')[1];
+    const [locale, setLocale] = useState('tr');
 
-  switch(locale){
-    case "tr":
-
-  }
+    useEffect(() => {
+        if(currentLocale != ('' || null || undefined) && currentLocale == ('en' || 'de'))
+            setLocale(currentLocale)
+    }, []);
 
   if (error) return <div>Failed to load</div>;
 

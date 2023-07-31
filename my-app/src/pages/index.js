@@ -40,7 +40,10 @@ export default function Home({ views }) {
     }
   }
 
-  const { locale } = useRouter();
+  const router = useRouter();
+  const currentLocale = router.asPath.split('/')[1];
+    const [locale, setLocale] = useState('tr');
+
 
   return (
     <>

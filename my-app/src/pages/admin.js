@@ -111,12 +111,16 @@ function DisplayProjectsForAdmin({ search, setDisplay, close, setProjectIndex })
     const projectElements = [];
     const displayedProject = [];
 
-    const { locale } = useRouter();
+    const router = useRouter();
+    const [locale, setLocale] = useState('tr');
+
 
     if (error) console.log(error);
     if (isLoading) console.log('Loading...')
     
     if (!isLoading){
+        
+
         const parsedData = JSON.parse(data);
 
         for (let index = 0; index < parsedData.project.length; index++) {
