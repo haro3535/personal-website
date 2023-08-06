@@ -2,8 +2,6 @@ import useSWR from 'swr';
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 import { useState, useEffect } from "react"
-import Texture1 from './backgroundTexture1';
-import Texture2 from './backgroundTexture2';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -68,16 +66,7 @@ function TextDE(){
 function DisplayProjects(){
 
   const { data, error, isLoading } = useSWR('/api/project', fetcher);
-
-  const router = useRouter();
-  const currentLocale = router.asPath.split('/')[1];
-    const [locale, setLocale] = useState('tr');
-
-    useEffect(() => {
-        if(currentLocale != ('' || null || undefined) && currentLocale == ('en' || 'de'))
-            setLocale(currentLocale)
-    }, []);
-
+  
   if (error) return <div>Failed to load</div>;
 
   if (isLoading) return <div>Loading...</div>;
@@ -101,8 +90,8 @@ function DisplayProjects(){
               />
             </div>
             <div className='container' style={{backgroundColor: '#F1F6F9', color: "black"}}>
-              <h3>{parsedData.project[index].headers[locale]}</h3>
-              <p>{parsedData.project[index].descriptions[locale]}</p>
+              <h3>{parsedData.project[index].headers['tr']}</h3>
+              <p>{parsedData.project[index].descriptions['tr']}</p>
             </div>
         </a>
       )

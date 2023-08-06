@@ -3,21 +3,7 @@ import { useRouter } from "next/router";
 
 export default function AboutView({ view }){
 
-    const router = useRouter();
-    const [locale, setLocale] = useState('tr');
-
-
-    const [displayWhite , setDisplayWhite] = useState('flex');
-    const [displayBlue , setDisplayBlue] = useState('none');
-
-    if (view.texture == 0 && displayWhite != 'flex') {
-        setDisplayWhite('flex')
-        setDisplayBlue('none')
-    }
-    else if (view.texture == 1 && displayWhite != 'none'){
-        setDisplayWhite('none')
-        setDisplayBlue('flex')
-    }
+    const { locale } = useRouter();
 
     const year = new Date().getFullYear() - 2003;
 
