@@ -5,13 +5,15 @@ export default function AboutView({ view }){
 
     const { locale } = useRouter();
 
+    const { mcolor, tcolor } = view;
+
     const year = new Date().getFullYear() - 2003;
 
     switch(locale){
         case 'tr':
                 return(
                     <>
-                    <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: view.mcolor, color: view.tcolor}}>
+                    <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: mcolor, color: tcolor}}>
                         <div className="container h-auto vw-70" style={{zIndex: '2'}}>
                             <PrintTurkish year={year}></PrintTurkish>
                         </div>
@@ -21,7 +23,7 @@ export default function AboutView({ view }){
         case 'de':
                 return(
                     <>
-                    <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: view.mcolor, color: view.tcolor}}>
+                    <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: mcolor, color: tcolor}}>
                         <div className="container h-auto vw-70" style={{zIndex: '2'}}>
                             <PrintDeutsch year={year}></PrintDeutsch>
                         </div>
@@ -31,7 +33,7 @@ export default function AboutView({ view }){
         default:
                 return(
                     <>
-                    <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: view.mcolor, color: view.tcolor}}>
+                    <main className="container-fluid d-flex vh-100  justify-content-center align-items-center" id="about" style={{backgroundColor: mcolor, color: tcolor}}>
                         <div className="container h-auto vw-70" style={{zIndex: '2'}}>
                             <PrintEnglish year={year}></PrintEnglish>
                         </div>

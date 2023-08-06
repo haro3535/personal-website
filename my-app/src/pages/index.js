@@ -87,7 +87,7 @@ export default function Home({ views }) {
 
 
 
-export async function getStaticProps(){
+export async function getServerSideProps(){
 
   const res = await fetch('http://localhost:3000/api/view');
   const views = await res.json();
