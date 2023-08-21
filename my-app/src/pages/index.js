@@ -10,8 +10,6 @@ import MyAccounts from './socialAccounts'
 import AboutView from './aboutView'
 import Footer from './footer'
 import { createElement, useEffect, useState } from 'react'
-import Texture1 from './backgroundTexture1';
-import Texture2 from './backgroundTexture2';
 import { useRouter } from 'next/router';
 
 const inter = Inter({ subsets: ['latin'] })
