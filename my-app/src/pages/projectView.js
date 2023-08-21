@@ -10,24 +10,37 @@ export default function ProjectsView({ view }){
 
     const { locale } = useRouter();
 
+    const [stateView, setStateView] = useState({
+      texture: "0",
+      mcolor: "#F1F6F9",
+      bcolor: "#394867",
+      tcolor: "black"
+  });
+
+  useEffect(() => {
+      if(view != undefined){
+          setStateView(view)
+      }
+  })
+
     switch(locale){
       case 'tr':
         return(
-          <main id='projectsView' className="projects" style={{color: view.tcolor, backgroundColor: view.mcolor}}>
+          <main id='projectsView' className="projects" style={{color: stateView.tcolor, backgroundColor: stateView.mcolor}}>
             <TextTR></TextTR>
             <DisplayProjects />
           </main>
         )
       case 'de':
         return(
-          <main id='projectsView' className="projects" style={{color: view.tcolor, backgroundColor: view.mcolor}}>
+          <main id='projectsView' className="projects" style={{color: stateView.tcolor, backgroundColor: stateView.mcolor}}>
             <TextDE></TextDE>
             <DisplayProjects />
           </main>
         )
       default:
         return(
-          <main id='projectsView' className="projects" style={{color: view.tcolor, backgroundColor: view.mcolor}}>
+          <main id='projectsView' className="projects" style={{color: stateView.tcolor, backgroundColor: stateView.mcolor}}>
             <TextEN></TextEN>
             <DisplayProjects />
           </main>
