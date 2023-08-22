@@ -23,7 +23,7 @@ export default function Admin(){
 
         const { admin } = parseCookies();
         if (!admin || admin !== 'true') {
-            router.push('/login');
+            router.push(`${process.env.URL}/login`);
         }
     }, []);
 
