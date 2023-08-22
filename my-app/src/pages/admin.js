@@ -181,7 +181,7 @@ function deletePopup(key){
 
     if (confirm('Silmek istiyor musunuz?')) {
         
-        fetch('/api/controlPanel', {
+        fetch(`${process.env.URL}/api/controlPanel`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -200,7 +200,7 @@ function deletePopup(key){
  async function logout(){
 
     try {
-        const response = await fetch('/api/logout', {
+        const response = await fetch(`${process.env.URL}/api/logout`, {
           method: 'POST',
         });
   

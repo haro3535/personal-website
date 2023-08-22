@@ -87,7 +87,7 @@ export default function Home({ views }) {
 
 export async function getServerSideProps(){
 
-  const res = await fetch('http://localhost:3000/api/view');
+  const res = await fetch(`${process.env.URL}/api/view`);
   const views = await res.json();
 
   return{
@@ -95,15 +95,6 @@ export async function getServerSideProps(){
       views: JSON.parse(views),
     },
   }
-}
-
-function DisplayTexture({ texture }){
-
-  if (texture == 0) {
-    return <Texture1></Texture1>
-  }
-  
-  return <Texture2></Texture2>
 }
 
 function PrintProfession({ locale }){

@@ -105,7 +105,7 @@ export default function Menus({ display, projectIndex }){
 
         // datayı fetch lemek kaldı 
 
-        fetch('/api/update', {
+        fetch(`${process.env.URL}/api/update`, {
             method: "POST",
             body: body,
         })

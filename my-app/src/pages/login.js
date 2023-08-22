@@ -35,7 +35,7 @@ export default function Login(){
     const hash = CryptoJS.SHA256(password);
     const encryptedPassword = hash.toString(CryptoJS.enc.Hex);
 
-    fetch('/api/login',{
+    fetch(`${process.env.URL}/api/login`,{
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -47,7 +47,7 @@ export default function Login(){
       
       res.json().then((succeed) => {
         if (succeed) {
-          router.push('http://localhost:3000/admin')
+          router.push(`${process.env.URL}/admin`)
           console.log('resokey')
         }
         else console.log('its not okey')
